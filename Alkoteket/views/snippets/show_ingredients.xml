@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>   
+
+    <template id="show_ingredients" name="Show Ingredients">
+
+        <section class="show_ingredients">
+
+            <div class="container">
+
+                <div class="text-center py-5">
+                    <h2 class="h1">Browse Ingredients</h2> 
+                </div>
+
+                <div class="row" id="show-drink-row">
+
+                    <div class="col-lg-3">
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="img-container mr-3 rounded">
+                                <img style="max-height:300px; width:auto;" src="Alkoteket/static/src/img/drink.jpg"/>
+                            </div>
+
+                            <div>
+                                <h5 class="mb-0">Ingredient name</h5>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </template>
+
+</odoo>

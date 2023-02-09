@@ -1,0 +1,30 @@
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
+
+import logging
+_logger = logging.getLogger(__name__)
+
+class AlkoteketDrinkReview(models.Model):
+    _name = "alkoteket.drink.review"
+    _description = "Review"
+    
+    # user_id = fields.Many2one('res.users', string='User')
+    score = fields.Integer(string="Score")
+    review = fields.Text(string="Review")
+    drink_id = fields.Many2one("alkoteket.drink", string="Drink")
+    
+    @api.constrains('score')
+    def _check_score(self):
+        for record in self:
+            if record.score < 1 or record.score > 5:
+                raise ValidationError("The score must be between 1 and 5.")
+    # _constraints = [
+    #     (_check_score, 'The score must be between 1 and 5.', ['score']),
+    # ]
+    
+    @api.model
+    def create(self, vals):
+        _logger.error(f"Vals:-------------------{vals}")
+        _logger.error(f"Self:-------------------{self}")
+        review = super().create(vals)
+        return review

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkoteket_header" inherit_id="website.layout" name="Alkoteket Header">
+        <xpath expr="//header" position="replace">
+
+            <div class="container">
+
+                <header>
+
+                    <a href="/">
+                        <h1>alkoteket</h1>
+                    </a>
+
+                    <nav class="nav1">
+                        <li>
+                            <a href="/join">Join</a>
+                        </li>
+
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                    </nav>
+
+                </header>
+
+                <nav class="nav2">
+                        <li>
+                            <a href="/join">Join</a>
+                        </li>
+
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                    </nav>
+            
+            </div>
+
+        </xpath>
+
+    </template>
+
+</odoo>

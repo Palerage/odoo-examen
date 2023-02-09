@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ingredient_amount_tree" model="ir.ui.view">
+        <field name="name">alkoteket.ingredient.amount.tree</field>
+        <field name="model">alkoteket.ingredient.amount</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="ingredient_ids"/>
+                <field name="qty"/>
+                <field name="drink_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ingredient_amount_form" model="ir.ui.view">
+        <field name="name">alkoteket.ingredient.amount.form</field>
+        <field name="model">alkoteket.ingredient.amount</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                    </div>
+                    <group>
+                        <group>
+                            <field name="ingredient_ids"/>
+                        </group>
+                        <group>
+                            <field name="qty"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ingredient_amount_search" model="ir.ui.view">
+        <field name="name">alkoteket.ingredient.amount.search</field>
+        <field name="model">alkoteket.ingredient.amount</field>
+        <field name="arch" type="xml">
+            <search string="Ingredient Amounts">
+            </search>
+        </field>
+    </record>
+
+    <record id="action_alkoteket_ingredient_amount" model="ir.actions.act_window">
+        <field name="name">Ingredient Amounts</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">alkoteket.ingredient.amount</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context"></field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first ingredient amounts!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_ingredient_amount"
+        name="Ingredient Amounts"
+        parent="menu_drink_root"
+        action="action_alkoteket_ingredient_amount"
+        sequence="18"/>
+
+</odoo>

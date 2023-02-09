@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_drink_review_tree" model="ir.ui.view">
+        <field name="name">alkoteket.drink.review.tree</field>
+        <field name="model">alkoteket.drink.review</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="drink_id"/>
+                <field name="score"/>
+                <field name="review"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_drink_review_form" model="ir.ui.view">
+        <field name="name">alkoteket.drink.review.form</field>
+        <field name="model">alkoteket.drink.review</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                    </div>
+                    <group>
+                        <field name="score"/>
+                        <field name="review"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_drink_review_search" model="ir.ui.view">
+        <field name="name">alkoteket.drink.review.search</field>
+        <field name="model">alkoteket.drink.review</field>
+        <field name="arch" type="xml">
+            <search string="Reviews">
+            </search>
+        </field>
+    </record>
+
+    <record id="action_alkoteket_drink_review" model="ir.actions.act_window">
+        <field name="name">Reviews</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">alkoteket.drink.review</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context"></field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first review!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_drink_review"
+        name="Reviews"
+        parent="menu_drink_root"
+        action="action_alkoteket_drink_review"
+        sequence="25"/>
+
+</odoo>

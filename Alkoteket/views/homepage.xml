@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="custom_homepage" inherit_id="website.homepage" name="Home">
+        <xpath expr="//t[@t-call='website.layout']" position="replace">
+
+            <t t-call="website.layout">
+
+                <t t-set='pageName' t-value="'homepage'"/>
+
+                <div id="wrap" class="oe_structure">
+
+                    <div class="container">
+
+                        <section class="homegrid">
+                            
+                            <a href="/browse">
+                                <div class="box">
+
+                                    <h2>Browse</h2>
+                                    <i class="bi bi-collection-fill"></i>
+
+                                </div>
+                            </a>
+
+                            <a href="/create">
+                                <div class="box">
+
+                                    <h2>Create</h2>
+                                    <i class="bi bi-plus-square-fill"></i>
+                                    
+
+                                </div>
+                            </a>
+
+                            <a href="/profile">
+                                <div class="box">
+
+                                    <h2>Profile</h2>
+                                    <i class="bi bi-person-fill"></i>
+                                    
+
+                                </div>   
+                            </a>
+
+                            <a href="about">
+                                <div class="box">
+
+                                    <h2>About</h2>
+                                    <i class="bi bi-info-square-fill"></i>
+                                    
+
+                                </div>      
+                            </a>   
+
+                        </section>
+                
+                    </div>
+
+                </div>  
+            </t>
+
+        </xpath>
+    </template>
+
+</odoo>

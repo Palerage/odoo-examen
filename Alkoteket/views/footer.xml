@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkoteket_footer" inherit_id="website.layout" name="Alkoteket Footer">
+        <xpath expr="//footer" position="replace">
+
+        <div class="container">
+
+            <footer>
+
+                <ul>
+                    <h4>KONTAKTA OSS</h4>
+                    <li>
+                        <a href="https://www.hitta.se/v%C3%A4rmlands+l%C3%A4n/s%C3%A4ffle/billsvik+ankeborg/omr%C3%A5de/59.09999:12.835658" target="_blank">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <p>Hitta Oss</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+4733378901">
+                            <i class="bi bi-telephone-fill"></i>
+                            <p>Ring Oss</p>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul>
+                    <h4>SOCIALA MEDIER</h4>
+                    <li>
+                        <a href="https://www.google.com/" target="_blank">
+                            <i class="bi bi-instagram"></i>                        
+                            <p>Instagram</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.google.com/" target="_blank">
+                            <i class="bi bi-facebook"></i>
+                            <p>Facebook</p>
+                        </a>
+                    </li>
+                </ul>
+
+            </footer>
+        
+        </div>
+
+        </xpath>
+    </template>
+
+</odoo>

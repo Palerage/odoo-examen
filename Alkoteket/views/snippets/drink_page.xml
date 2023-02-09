@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>   
+
+    <template id="drink_page" name="Drink Page">
+
+        <section class="drink-page container">
+
+            <div id="drink-page" class=""></div>
+
+        </section>
+
+    </template>
+
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_container_kanban" model="ir.ui.view">
+        <field name="name">alkoteket.container.kanban</field>
+        <field name="model">alkoteket.container</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="volume"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        <field name="name"/>
+                                    </li>
+                                    <li>
+                                        <field name="image" widget="image" class="oe_avatar"/>
+                                    </li>
+                                    <li>
+                                        <field name="volume"/>
+                                    </li>                                    
+                                    <li>
+                                        <field name="id"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_container_tree" model="ir.ui.view">
+        <field name="name">alkoteket.container.tree</field>
+        <field name="model">alkoteket.container</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="volume"/>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_container_form" model="ir.ui.view">
+        <field name="name">alkoteket.container.form</field>
+        <field name="model">alkoteket.container</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="volume"/>
+                        </group>
+                        <group>
+                            <field name="image" widget="image" class="oe_avatar"/>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_container_search" model="ir.ui.view">
+        <field name="name">alkoteket.container.search</field>
+        <field name="model">alkoteket.container</field>
+        <field name="arch" type="xml">
+            <search string="containers">
+            </search>
+        </field>
+    </record>
+
+    <record id="action_alkoteket_container" model="ir.actions.act_window">
+        <field name="name">containers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">alkoteket.container</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context"></field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first container!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_container"
+        name="containers"
+        parent="menu_alkoteket_root"
+        action="action_alkoteket_container"
+        sequence="19"/>
+
+</odoo>

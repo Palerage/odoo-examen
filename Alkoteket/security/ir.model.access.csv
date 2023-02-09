@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_alkoteket_drink,access.alkoteket.drink,model_alkoteket_drink,,1,1,1,1
+access_alkoteket_ingredient,access.alkoteket.ingredient,model_alkoteket_ingredient,,1,1,1,1
+access_alkoteket_ingredient_amount,access.alkoteket.ingredient_amount,model_alkoteket_ingredient_amount,,1,1,1,1
+access_alkoteket_container,access.alkoteket.container,model_alkoteket_container,,1,1,1,1
+access_alkoteket_drink_review,access.alkoteket.drink.review,model_alkoteket_drink_review,,1,1,1,1
