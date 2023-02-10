@@ -18,9 +18,9 @@ class AlkoteketUser(models.Model):
     fav_drinks = fields.Many2many('alkoteket.drink', 'alkoteket_user_drink_rel', string="Favorite Drinks", tracking=True)
     
 
-class AlkoteketUserDrink(models.Model):
-    _name = "alkoteket.user.drink"
-    _description = "Contains the many-to-many relationship between 'AlkoteketUser' and 'alkoteket.drink'"
+# class AlkoteketUserDrink(models.Model):
+#     _name = "alkoteket.user.drink"
+#     _description = "Contains the many-to-many relationship between 'AlkoteketUser' and 'alkoteket.drink'"
 
-    user_id = fields.Many2one('alkoteket.user', string="User", required=True)
-    drink_id = fields.Many2one('alkoteket.drink', string="Drink", required=True)
+#     user_id = fields.Many2one('alkoteket.user', string="User", required=True)
+#     drink_id = fields.Many2one('alkoteket.drink', string="Drink", required=True)
