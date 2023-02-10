@@ -1,1 +1,1 @@
-from . import drink, ingredient, ingredientamount, container, review
+from . import drink, ingredient, ingredientamount, container, review, user

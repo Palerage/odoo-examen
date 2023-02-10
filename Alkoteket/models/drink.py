@@ -114,7 +114,8 @@ class AlkoteketDrink(models.Model):
     @api.model
     def create(self, vals):
         _logger.error(vals)
-        
+        if not vals.get('note'):
+            vals["note"] = "No description available..."
         # Sets the appropriate type depending on alcoholcontent in the ingredients.
         drink = super().create(vals)
         drink.created_by_id = request.env.user.id

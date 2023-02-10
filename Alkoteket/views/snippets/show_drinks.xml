@@ -6,6 +6,7 @@
 
         <section class="show-drinks container">
 
+            <div id="searchfield"></div>
             <div id="show-drinks" class="drinkgrid"></div>
 
         </section>

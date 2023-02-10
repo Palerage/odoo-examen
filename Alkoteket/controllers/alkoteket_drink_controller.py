@@ -84,13 +84,21 @@ class AlkoteketDrinkController(http.Controller):
     def get_random_cocktails(self, count=1):
         drinks = request.env['alkoteket.drink'].sudo().search([])
         random_drinks = random.sample(drinks, min(int(count), len(drinks)))
+        random_drinks = sorted(random_drinks, key=lambda x: x.average_score, reverse=True)
         # _logger.error(str(drinks[0].image))
-        result = [{
-            'id': drink.id,
-            'name': drink.name,
-            'image' : str(drink.image)[2:-1],
-            'average_score' : drink.average_score,
-        } for drink in random_drinks]
+        result = []
+        for drink in random_drinks:
+            ingredients = []
+            for ingredient in drink.ingredient_amount_ids:
+                ingredients.append({'id' : ingredient.ingredient_ids.id, 'name' : ingredient.ingredient_ids.name, 'qty' : ingredient.qty})
+            temp = {
+                'id': drink.id,
+                'name': drink.name,
+                'image' : str(drink.image)[2:-1],
+                'average_score' : drink.average_score,
+                'ingredients' : ingredients
+            }
+            result.append(temp)
         return json.dumps(result)
     
     # Returns drinks based on search in the name
@@ -164,9 +172,11 @@ class AlkoteketDrinkController(http.Controller):
     @http.route(['/alkoteket/cocktailsbyuser/<int:id>'], auth='public', type="json", methods=['POST'] )
     def get_cocktails_by_user(self, id):
         _logger.error(id)
+        _logger.error(f"User.id = {request.env.user.id}")
+
         if id == 0:
             id = request.env.user.id
-        _logger.error(id)
+        # _logger.error(id)
         drinks = request.env['alkoteket.drink'].sudo().search([('create_uid', '=', id)])
         result = [{
             'id': drink.id,

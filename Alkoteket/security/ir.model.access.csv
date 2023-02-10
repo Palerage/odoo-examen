@@ -4,3 +4,4 @@ access_alkoteket_ingredient,access.alkoteket.ingredient,model_alkoteket_ingredie
 access_alkoteket_ingredient_amount,access.alkoteket.ingredient_amount,model_alkoteket_ingredient_amount,,1,1,1,1
 access_alkoteket_container,access.alkoteket.container,model_alkoteket_container,,1,1,1,1
 access_alkoteket_drink_review,access.alkoteket.drink.review,model_alkoteket_drink_review,,1,1,1,1
+access_alkoteket_user,access.alkoteket.user,model_alkoteket_user,,1,1,1,1

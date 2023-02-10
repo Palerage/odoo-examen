@@ -8,12 +8,13 @@
     'category': 'Theme',
     'website': "https://www.odoomates.tech",
     'license': 'LGPL-3',
-    'depends': ['website'],
+    'depends': ['website', 'base'],
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
         'views/assets.xml',
         'views/drink_view.xml',
+        'views/user_view.xml',
         'views/ingredient_view.xml',
         'views/ingredient_amount_view.xml',
         'views/container_view.xml',
@@ -25,13 +26,6 @@
         'views/snippets/show_ingredients.xml',
         'views/snippets/snippets.xml',
     ],
-    # 'assets':{
-    #     'web.assets_frontend':[
-            
-    #         'Alkoteket/static/src/js/show_drinks.js',
-            
-    #     ],
-    # },
     'demo': [],
     'qweb': [],
     'installable': True,

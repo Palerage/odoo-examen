@@ -63,7 +63,7 @@ if (window.location.pathname === "/drinkview") {
           drinkTemplate += `<p>${element.name + " " + element.qty + " cl"}</p>`;
         }
 
-        if (drink.note === "") {
+        if (drink.note == false) {
           drink.note = "No description available.";
         }
 
