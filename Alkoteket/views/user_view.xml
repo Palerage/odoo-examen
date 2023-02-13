@@ -7,6 +7,7 @@
         <field name="inherit_id" ref="base.view_users_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='totp_enabled']" position="before">
+                <field name="created_drinks"/>
                 <field name="fav_drinks"/>
             </xpath>
         </field>
@@ -21,10 +22,14 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='phone_numbers']" position="after">
                 <notebook>
-                    <page name="fav_drinks_page" string="Favourite drinks">
+                    <page name="fav_drinks_page" string="Drink Information">
                         <div class="row">                   
                             <div class="col-lg-5 d-flex flex-column">
-                                <separator string="Skills"/>
+                                <separator string="Created"/>
+                                <field name="created_drinks"/>
+                            </div>
+                            <div class="col-lg-5 d-flex flex-column">
+                                <separator string="Favourite"/>
                                 <field name="fav_drinks"/>
                             </div>
                         </div>

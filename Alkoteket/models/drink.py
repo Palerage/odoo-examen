@@ -30,7 +30,8 @@ class AlkoteketDrink(models.Model):
     drink_review_ids = fields.One2many("alkoteket.drink.review", 'drink_id', string="Reviews")
     average_score = fields.Float(string="AverageScore", compute='_compute_average_score', store=True)
     image = fields.Binary(string='Drink Image')
-    created_by_id = fields.Integer(string='CreatedById')    
+    
+    created_by_id = fields.Many2one('res.users', string="Creator")
     
     # created_by_id = 
     #Add later
@@ -118,7 +119,7 @@ class AlkoteketDrink(models.Model):
             vals["note"] = "No description available..."
         # Sets the appropriate type depending on alcoholcontent in the ingredients.
         drink = super().create(vals)
-        drink.created_by_id = request.env.user.id
+        drink.created_by_id = request.env.user
         ingredients = drink.ingredient_amount_ids.mapped('ingredient_ids')
         has_alcohol = any(ingredient.alcoholcontent > 0 for ingredient in ingredients)
         if has_alcohol:
