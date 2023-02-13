@@ -1,3 +1,11 @@
+function AddToFavourites(){
+  console.log("Added")
+  ajax.rpc("/alkoteket/favouritesbyuser/" + id).then(function (data) {
+    console.log("Added")
+    });
+}
+
+
 if (window.location.pathname === "/profile") {
   var count = 10;
   odoo.define("fav_drinks", function (require) {
@@ -9,7 +17,7 @@ if (window.location.pathname === "/profile") {
       id = 0;
     }
 
-    ajax.rpc("/alkoteket/cocktailsbyuser/" + id).then(function (data) {
+    ajax.rpc("/alkoteket/favouritesbyuser/" + id).then(function (data) {
       console.log(data);
       var drinks = JSON.parse(data);
       console.log(drinks.length);

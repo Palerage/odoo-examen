@@ -1,8 +1,21 @@
 if (window.location.pathname === "/drinkview") {
+
   odoo.define("drink_page", function (require) {
     var ajax = require("web.ajax");
 
     id = window.location.search.split("?")[1];
+
+    function AddToFavourite(){
+      ajax.rpc("/alkoteket/addfavourite/" + id).then(function (data) {
+        console.log("Added")
+        });
+    }
+
+    function RemoveFavourite(){
+      ajax.rpc("/alkoteket/removefavourite/" + id).then(function (data) {
+        console.log("Removed")
+        });
+    }
 
     console.log(id);
 
@@ -117,12 +130,24 @@ if (window.location.pathname === "/drinkview") {
         const icon1 = document.getElementById("icon-1");
         const icon2 = document.getElementById("icon-2");
 
+        if (drink.favourite == false){
+          icon2.style.display = "none";
+          icon1.style.display = "inline-block";
+        }
+
+        else {
+          icon1.style.display = "none";
+          icon2.style.display = "inline-block";
+        }
+
         icon1.addEventListener("click", function () {
+          AddToFavourite()
           icon1.style.display = "none";
           icon2.style.display = "inline-block";
         });
 
         icon2.addEventListener("click", function () {
+          RemoveFavourite()
           icon2.style.display = "none";
           icon1.style.display = "inline-block";
         });
