@@ -17,9 +17,15 @@ class AlkoteketDrinkController(http.Controller):
         # _logger.error(str(drink.create_date))
         ingredients = []
         reviews = []
-        
+        user = request.env['res.users'].sudo().browse(request.session.uid)
+        favourited = False
         # _logger.error(str(reviews))
-        if drink:            
+        if drink:
+            if id in user.fav_drinks.ids:
+                favourited = True
+            else:
+                favourited = False
+            
             for ingredient in drink.ingredient_amount_ids:
                 ingredients.append({'id' : ingredient.ingredient_ids.id, 'name' : ingredient.ingredient_ids.name, 'qty' : ingredient.qty})
             for review in drink.drink_review_ids:
@@ -36,8 +42,10 @@ class AlkoteketDrinkController(http.Controller):
                 'creator_id': str(drink.create_uid.id),
                 'drink_create_date': str(drink.create_date),
                 'review_amount': len(drink.drink_review_ids),
-                'reviews': reviews
+                'reviews': reviews,
+                'favourite' : favourited
             }
+            _logger.error(json.dumps(result))
             return json.dumps(result)
         else:
             return json.dumps({'error': 'Drink not found'})
@@ -186,4 +194,44 @@ class AlkoteketDrinkController(http.Controller):
         } for drink in drinks]
         return json.dumps(result)
     
+    # Returns favourite drinks based on id
+    @http.route(['/alkoteket/favouritesbyuser/<int:id>'], auth='public', type="json", methods=['POST'] )
+    def get_favourites_by_user(self, id):
+        _logger.error("----------------Favourites--------------")
+        
+        _logger.error(id)
+        _logger.error(f"User.id = {request.env.user.id}")
+
+        if id == 0:
+            id = request.env.user.id
+            
+        user = request.env['res.users'].sudo().browse(int(id))
+        fav_drinks = user.fav_drinks
+        # drink_names = [drink.name for drink in fav_drinks]
+        # _logger.error(id)
+        # drinks = request.env['alkoteket.drink'].sudo().search([('fav_drinks', '=', id)])
+        _logger.error(fav_drinks)
+        result = [{
+            'id': drink.id,
+            'name': drink.name,
+            'average_score' : drink.average_score,
+            'image' : str(drink.image)[2:-1]
+        } for drink in fav_drinks]
+        return json.dumps(result)
     
+    @http.route(['/alkoteket/addfavourite/<int:drinkId>'], auth='public', type="json", methods=['POST'] )
+    def add_favourite(self, drinkId):
+        _logger.error("Hej")
+        user = request.env.user
+        user.sudo().write({'fav_drinks': [(4, drinkId)]})
+        return json.dumps({'code': 'successfully added'})
+    
+    @http.route(['/alkoteket/removefavourite/<int:drinkId>'], auth='public', type="json", methods=['POST'])
+    def remove_favourite(self, drinkId):
+        current_user = request.env.user
+        drink = request.env['alkoteket.drink'].sudo().browse(drinkId)
+        fav_drinks = current_user.fav_drinks
+        fav_drinks -= drink
+        current_user.write({'fav_drinks': [(3, drinkId)]})
+        return json.dumps({'code': 'successfully removed'})
+
