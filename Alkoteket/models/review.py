@@ -28,3 +28,10 @@ class AlkoteketDrinkReview(models.Model):
         _logger.error(f"Self:-------------------{self}")
         review = super().create(vals)
         return review
+    
+    @api.model
+    def write(self, vals):
+        _logger.error(f"Vals:-------------------{vals}")
+        _logger.error(f"Self:-------------------{self}")
+        review = super().write(vals)
+        return review

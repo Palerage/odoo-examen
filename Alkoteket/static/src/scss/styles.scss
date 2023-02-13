@@ -103,19 +103,6 @@ body {
     letter-spacing: 6px;
   }
 
-  .picture {
-    position: relative;
-    width: 100%;
-  }
-
-  img {
-    padding-bottom: 20px;
-    width: 100%;
-    height: inherit;
-    object-fit: cover;
-    object-position: center;
-  }
-
   .creator {
     display: flex;
     gap: 6px;
@@ -123,10 +110,25 @@ body {
 
   .receptgrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
     .receptbox {
       padding: 20px;
+      .picture {
+        position: relative;
+        img {
+          width: 100%;
+          padding-bottom: 20px;
+          object-fit: contain;
+          object-position: center;
+        }
+        .favorite {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 0px 8px;
+        }
+      }
     }
   }
 
@@ -154,13 +156,6 @@ body {
     display: flex;
     width: 100%;
     justify-content: space-between;
-  }
-
-  .favorite {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0px 8px;
   }
 
   .bi-heart,
