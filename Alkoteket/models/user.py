@@ -16,7 +16,7 @@ class Users(models.Model):
     _description = "Contains relevant information about a specific 'Alkoteket User'"
     
     # user_id = fields.Many2one('res.users', string="Parent", tracking=True)
-    
+    created_drinks = fields.One2many('alkoteket.drink', 'created_by_id', string="Created Drinks", tracking=True)    
     fav_drinks = fields.Many2many('alkoteket.drink', string="Favourite Drinks", tracking=True)
     
 
