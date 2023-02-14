@@ -174,9 +174,6 @@ class AlkoteketDrinkController(http.Controller):
     # Returns drinks based on created by id
     @http.route(['/alkoteket/cocktailsbyuser/<int:id>'], auth='public', type="json", methods=['POST'] )
     def get_cocktails_by_user(self, id):
-        _logger.error(id)
-        _logger.error(f"User.id = {request.env.user.id}")
-
         if id == 0:
             id = request.env.user.id
         drinks = request.env['alkoteket.drink'].sudo().search([('create_uid', '=', id)])
@@ -193,6 +190,12 @@ class AlkoteketDrinkController(http.Controller):
     def get_favourites_by_user(self, id):
         if id == 0:
             id = request.env.user.id
+            
+        _logger.error(f"-----UserID-------- {request.env.user.id}")
+        _logger.error(f"-----UserName-------- {request.env.user.name}")
+        # _logger.error(f"-----UserFavourites-------- {request.env.user.fav_drinks[0].name}")
+        
+        
         user = request.env['res.users'].sudo().browse(int(id))
         fav_drinks = user.fav_drinks
         result = [{
@@ -205,13 +208,17 @@ class AlkoteketDrinkController(http.Controller):
     
     @http.route(['/alkoteket/addfavourite/<int:drinkId>'], auth='public', type="json", methods=['POST'] )
     def add_favourite(self, drinkId):
-        user = request.env.user
-        user.sudo().write({'fav_drinks': [(4, drinkId)]})
+        current_user = request.env.user
+        if current_user.id == 4:
+            return
+        current_user.sudo().write({'fav_drinks': [(4, drinkId)]})
         return json.dumps({'code': 'successfully added'})
     
     @http.route(['/alkoteket/removefavourite/<int:drinkId>'], auth='public', type="json", methods=['POST'])
     def remove_favourite(self, drinkId):
         current_user = request.env.user
+        if current_user.id == 4:
+            return
         drink = request.env['alkoteket.drink'].sudo().browse(drinkId)
         fav_drinks = current_user.fav_drinks
         fav_drinks -= drink
