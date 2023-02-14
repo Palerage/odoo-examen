@@ -2,7 +2,6 @@ if (window.location.pathname === "/profile") {
   var count = 10;
   odoo.define("profile_drinks", function (require) {
     var ajax = require("web.ajax");
-
     var id = window.location.search.split("?")[1];
 
     if (id === undefined) {
@@ -10,9 +9,7 @@ if (window.location.pathname === "/profile") {
     }
 
     ajax.rpc("/alkoteket/cocktailsbyuser/" + id).then(function (data) {
-      console.log(data);
       var drinks = JSON.parse(data);
-      console.log(drinks.length);
       count = drinks.length;
       console.log(drinks);
 

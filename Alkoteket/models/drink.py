@@ -33,11 +33,6 @@ class AlkoteketDrink(models.Model):
     
     created_by_id = fields.Many2one('res.users', string="Creator")
     
-    # created_by_id = 
-    #Add later
-    #https://www.youtube.com/watch?v=QOyFQOlroFc&list=PLqRRLx0cl0homY1elJbSoWfeQbRKJ-oPO&index=45
-    #https://www.youtube.com/watch?v=7jbaJSZLL8A&list=PLqRRLx0cl0homY1elJbSoWfeQbRKJ-oPO&index=54
-    
     # @api.depends('ingredient')
     # def _compute_alcohol_content(self):
     #     print("Hej")
@@ -153,7 +148,7 @@ class AlkoteketDrink(models.Model):
     
     # @api.model
     # def api_call(self, prompt):
-    #     openai.api_key = "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"
+    #     openai.api_key = ""
     #     model_engine = "text-davinci-003"
     #     try:
     #         completions = openai.Completion.create(
@@ -171,7 +166,7 @@ class AlkoteketDrink(models.Model):
     
     # @api.model
     # def generate_image(self, prompt):
-    #     openai.api_key = "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"
+    #     openai.api_key = ""
     #     try:
     #         response = openai.Image.create(
     #             prompt=prompt,
