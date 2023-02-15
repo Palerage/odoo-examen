@@ -9,7 +9,7 @@ if (window.location.pathname === "/profile") {
       id = 0;
     }
 
-    ajax.rpc("/alkoteket/cocktailsbyuser/" + id).then(function (data) {
+    ajax.rpc("/alkoteket/favouritesbyuser/" + id).then(function (data) {
       console.log(data);
       var drinks = JSON.parse(data);
       console.log(drinks.length);

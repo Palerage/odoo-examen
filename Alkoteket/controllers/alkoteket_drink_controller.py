@@ -6,20 +6,22 @@ import random
 _logger = logging.getLogger(__name__)
 
 class AlkoteketDrinkController(http.Controller):
-    
     _name = "alkoteket.api"
     
-       # Returns drink id and name based on id
+    # Returns drink info based on id
     @http.route(['/alkoteket/drink/<int:id>'], auth='public', type="json", methods=['POST'] )
     def get_drink_by_id(self, id):
-        # _logger.error(request.env.user.name)
         drink = request.env['alkoteket.drink'].sudo().search([('id', '=', id)], limit=1)
-        # _logger.error(str(drink.create_date))
         ingredients = []
         reviews = []
-        
-        # _logger.error(str(reviews))
-        if drink:            
+        user = request.env['res.users'].sudo().browse(request.session.uid)
+        favourited = False
+        if drink:
+            if id in user.fav_drinks.ids:
+                favourited = True
+            else:
+                favourited = False
+            
             for ingredient in drink.ingredient_amount_ids:
                 ingredients.append({'id' : ingredient.ingredient_ids.id, 'name' : ingredient.ingredient_ids.name, 'qty' : ingredient.qty})
             for review in drink.drink_review_ids:
@@ -36,8 +38,10 @@ class AlkoteketDrinkController(http.Controller):
                 'creator_id': str(drink.create_uid.id),
                 'drink_create_date': str(drink.create_date),
                 'review_amount': len(drink.drink_review_ids),
-                'reviews': reviews
+                'reviews': reviews,
+                'favourite' : favourited
             }
+            _logger.error(json.dumps(result))
             return json.dumps(result)
         else:
             return json.dumps({'error': 'Drink not found'})
@@ -61,7 +65,7 @@ class AlkoteketDrinkController(http.Controller):
         limit = int(limit)
         if limit > 20:
             limit = 20
-        if limit <= 0:
+        elif limit <= 0:
             limit = 1
         offset = int(offset)
         drinks = request.env['alkoteket.drink'].sudo().search([('type', '=', 'alcoholic')], offset=offset, limit=limit)
@@ -85,7 +89,6 @@ class AlkoteketDrinkController(http.Controller):
         drinks = request.env['alkoteket.drink'].sudo().search([])
         random_drinks = random.sample(drinks, min(int(count), len(drinks)))
         random_drinks = sorted(random_drinks, key=lambda x: x.average_score, reverse=True)
-        # _logger.error(str(drinks[0].image))
         result = []
         for drink in random_drinks:
             ingredients = []
@@ -171,12 +174,8 @@ class AlkoteketDrinkController(http.Controller):
     # Returns drinks based on created by id
     @http.route(['/alkoteket/cocktailsbyuser/<int:id>'], auth='public', type="json", methods=['POST'] )
     def get_cocktails_by_user(self, id):
-        _logger.error(id)
-        _logger.error(f"User.id = {request.env.user.id}")
-
         if id == 0:
             id = request.env.user.id
-        # _logger.error(id)
         drinks = request.env['alkoteket.drink'].sudo().search([('create_uid', '=', id)])
         result = [{
             'id': drink.id,
@@ -186,4 +185,72 @@ class AlkoteketDrinkController(http.Controller):
         } for drink in drinks]
         return json.dumps(result)
     
+    # Returns favourite drinks based on id
+    @http.route(['/alkoteket/favouritesbyuser/<int:id>'], auth='public', type="json", methods=['POST'] )
+    def get_favourites_by_user(self, id):
+        if id == 0:
+            id = request.env.user.id
+            
+        _logger.error(f"-----UserID-------- {request.env.user.id}")
+        _logger.error(f"-----UserName-------- {request.env.user.name}")
+        # _logger.error(f"-----UserFavourites-------- {request.env.user.fav_drinks[0].name}")
+        
+        
+        user = request.env['res.users'].sudo().browse(int(id))
+        fav_drinks = user.fav_drinks
+        result = [{
+            'id': drink.id,
+            'name': drink.name,
+            'average_score' : drink.average_score,
+            'image' : str(drink.image)[2:-1]
+        } for drink in fav_drinks]
+        return json.dumps(result)
     
+    @http.route(['/alkoteket/addfavourite/<int:drinkId>'], auth='user', type="json", methods=['POST'] )
+    def add_favourite(self, drinkId):
+        current_user = request.env.user
+        # if current_user.id == 4:
+        #     return
+        current_user.sudo().write({'fav_drinks': [(4, drinkId)]})
+        return json.dumps({'code': 'successfully added'})
+    
+    @http.route(['/alkoteket/removefavourite/<int:drinkId>'], auth='user', type="json", methods=['POST'])
+    def remove_favourite(self, drinkId):
+        current_user = request.env.user
+        # if current_user.id == 4:
+        #     return
+        drink = request.env['alkoteket.drink'].sudo().browse(drinkId)
+        fav_drinks = current_user.fav_drinks
+        fav_drinks -= drink
+        current_user.write({'fav_drinks': [(3, drinkId)]})
+        return json.dumps({'code': 'successfully removed'})
+    
+    
+    @http.route(['/alkoteket/createdrink'], type='json', auth='user', methods=['POST']) #, csrf=False
+    def create_drink(self, **kwargs):
+        # https://www.w3docs.com/snippets/javascript/how-to-convert-the-image-into-a-base64-string-using-javascript.html
+        drink_name = kwargs.get('drink_name')
+        drink_type = kwargs.get('drink_type')
+        ingredients = kwargs.get('ingredients')
+        image = kwargs.get('image')
+        user_id = request.env.user.id
+
+        drink = request.env['alkoteket.drink'].sudo().create({
+            'name': drink_name,
+            'type': drink_type,
+            'created_by_id': user_id,
+            'image': image
+        })
+
+        if ingredients:
+            for ingredient in ingredients:
+                ingredient_amount = ingredient.get('ingredient_amount')
+                ingredient_id = ingredient.get('ingredient_id')
+                request.env['alkoteket.ingredient.amount'].sudo().create({
+                    'drink_id': drink.id,
+                    'ingredient_ids': ingredient_id,
+                    'qty': ingredient_amount
+                })
+
+        return {'drink_id': drink.id}
+

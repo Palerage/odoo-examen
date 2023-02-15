@@ -18,9 +18,6 @@ class AlkoteketDrinkReview(models.Model):
         for record in self:
             if record.score < 1 or record.score > 5:
                 raise ValidationError("The score must be between 1 and 5.")
-    # _constraints = [
-    #     (_check_score, 'The score must be between 1 and 5.', ['score']),
-    # ]
     
     @api.model
     def create(self, vals):
