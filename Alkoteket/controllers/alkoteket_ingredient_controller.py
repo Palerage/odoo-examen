@@ -33,7 +33,8 @@ class AlkoteketIngredientController(http.Controller):
             limit = 1
         offset = int(offset)
         ingredients = request.env['alkoteket.ingredient'].sudo().search([], offset=offset, limit=limit)
-        ingredient_names = [ingredient.name for ingredient in ingredients]
+        sorted_ingredients = sorted(ingredients, key=lambda x: x.name, reverse=False)
+        ingredient_names = [ingredient.name for ingredient in sorted_ingredients]        
         return json.dumps(ingredient_names)
     
     # # Returns 1 random drink

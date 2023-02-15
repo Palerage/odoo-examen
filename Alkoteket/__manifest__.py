@@ -20,6 +20,7 @@
         'views/container_view.xml',
         'views/drink_review_view.xml',
         'views/snippets/show_drinks.xml',
+        'views/snippets/create_drink.xml',
         'views/snippets/drink_page.xml',
         'views/snippets/profile_drinks.xml',
         'views/snippets/fav_drinks.xml',
