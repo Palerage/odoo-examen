@@ -9,6 +9,7 @@
             <script type="text/javascript" src="/Alkoteket/static/src/js/profile_drinks.js"/>
             <script type="text/javascript" src="/Alkoteket/static/src/js/drink_page.js"/>
             <script type="text/javascript" src="/Alkoteket/static/src/js/fav_drinks.js"/>
+            <script type="text/javascript" src="/Alkoteket/static/src/js/add_ingredients.js"/>
         </xpath>
     </template>
 

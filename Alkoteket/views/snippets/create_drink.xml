@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="create_drink" name="Create Drink">
+        <section class="create-drink container">
+            <form action="action_page.php">
+
+                <div class="col">
+                    <div class="part">
+                        <label for="drinkname">Name:</label>
+                    </div>
+                    <div class="part">
+                        <input type="text" id="drinkname" name="drinkname" placeholder="Your name.."/>
+                    </div>
+                    <div class="part">
+                        <label for="img">Select image:</label>
+                    </div>
+                    <div class="part">
+                        <input type="file" id="img" name="img"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="part">
+                        <label for="ingredient">Ingredient</label>
+                        <select id="select_ingredient" class="select2"></select>
+                    </div>
+                    <div class="part">
+                        <label for="amount">Amount</label>
+                        <input type="number" name="amount" id="amountelement" value="4"/>
+                    </div>
+                    <div class="part">
+                        <button type="button" id="addbutton" onclick="addElement(0)">Add</button> 
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="add_ingredients"></div>
+                </div>
+                
+                <div class="col">
+                    <div class="part">
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="part">
+                        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+                    </div>
+                    <input type="submit" value="Submit"/>
+                </div>
+            </form>
+        </section>
+    </template>
+</odoo>
