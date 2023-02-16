@@ -1,13 +1,13 @@
 var ingredientlistelement = $("#add_ingredients");
 var index = 0;
 
-function GenerateHtml(ingredient = "", amount = "") {
+function GenerateHtml(ingredient = "", amount = "", ingredient_id = "") {
   index++;
   var htmlToAdd = `
     <div id="ingredientelement-${index}" class="ingredientelementa">
       <div class="part">  
         <div class="topicselect">
-          <input type="text" id="ingredient-${index}" name="ingredient" value="${ingredient}"/>
+          <input type="text" id="ingredient-${index}" name="ingredient" value="${ingredient}" data-id="${ingredient_id}"/>
         </div>
         <div class="topicselect">
           <input type="text" id="amount-${index}" name="amount" value="${amount}"/>
@@ -27,7 +27,7 @@ $("#drink-form").on("submit", function (event) {
   // var drink_type = $("#drinktype").val();
   var ingredients = [];
   $("#add_ingredients .ingredientelementa").each(function () {
-    var ingredient_id = $(this).find("input[name=ingredient]").val();
+    var ingredient_id = $(this).find("input[name=ingredient]").data('id');
     var ingredient_amount = $(this).find("input[name=amount]").val();
     ingredients.push({
       ingredient_id: ingredient_id,
@@ -83,9 +83,10 @@ function addElement() {
   var amountInput = document.getElementById("amountelement");
   var ingredientValue = ingredientInput.innerHTML;
   var amountValue = amountInput.value;
+  var ingredient_id = $('#select_ingredient').val();
   // ingredientInput.value = "";
   amountInput.value = 4;
-  GenerateHtml(ingredientValue, amountValue);
+  GenerateHtml(ingredientValue, amountValue, ingredient_id);
 }
 
 function removeElement(elementindex) {
