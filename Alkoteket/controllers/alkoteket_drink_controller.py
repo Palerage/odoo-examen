@@ -3,6 +3,7 @@ from odoo import http
 from odoo.http import request
 import logging
 import random
+import json
 _logger = logging.getLogger(__name__)
 
 class AlkoteketDrinkController(http.Controller):
@@ -226,22 +227,25 @@ class AlkoteketDrinkController(http.Controller):
         return json.dumps({'code': 'successfully removed'})
     
     
-    @http.route(['/alkoteket/createdrink'], type='json', auth='user', methods=['POST']) #, csrf=False
+    @http.route(['/alkoteket/createdrink'], type='http', auth='user', methods=['POST'], csrf=False)
     def create_drink(self, **kwargs):
+        _logger.error(f"---------------------KWARGS----------------------------{kwargs.get('ingredients')}")
         # https://www.w3docs.com/snippets/javascript/how-to-convert-the-image-into-a-base64-string-using-javascript.html
         drink_name = kwargs.get('drink_name')
-        drink_type = kwargs.get('drink_type')
+        drink_type = 'alcoholic'# kwargs.get('drink_type')
         ingredients = kwargs.get('ingredients')
-        image = kwargs.get('image')
+        # image = kwargs.get('image')
         user_id = request.env.user.id
 
         drink = request.env['alkoteket.drink'].sudo().create({
-            'name': drink_name,
-            'type': drink_type,
-            'created_by_id': user_id,
-            'image': image
+            'name': str(drink_name),
+            'type': str(drink_type),
+            'created_by_id': str(user_id),
+            # 'image': image
         })
 
+        ingredients = json.loads(kwargs.get('ingredients'))
+        
         if ingredients:
             for ingredient in ingredients:
                 ingredient_amount = ingredient.get('ingredient_amount')

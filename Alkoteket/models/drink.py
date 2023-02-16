@@ -18,7 +18,7 @@ class AlkoteketDrink(models.Model):
     type = fields.Selection([
         ('alcoholic', 'Alcoholic'),
         ('nonalcoholic', 'Non-Alcoholic')
-    ], required=True, default='alcoholic') #, store=True, compute='_compute_alcohol_content'
+    ],  default='alcoholic') #, store=True, compute='_compute_alcohol_content'
     note = fields.Text(string='Instructions')
     ingredient_amount_ids = fields.One2many('alkoteket.ingredient.amount', 'drink_id',
                                             string="Ingredients",

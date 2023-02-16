@@ -263,49 +263,182 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
     max-width: 1000px;
 
     .col {
       display: flex;
       flex-direction: column;
-      background-color: #ff4d00;
-      padding: 20px;
+      justify-content: center;
+      background-image: linear-gradient(
+        to bottom right,
+        rgb(244, 134, 0),
+        rgb(255, 201, 120)
+      );
+      color: white;
+      box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.369);
+      padding: 15px 30px 30px 30px;
+      border-radius: 12px;
+      margin-bottom: 40px;
 
-      input {
+      .submitButton {
         width: 100%;
+        padding: 10px;
+        margin-top: 40px;
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        font-weight: 500;
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.369);
       }
-      textarea {
-        width: 100%;
-      }
-    }
-
-    .row {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      background-color: #ff6d2f;
-      padding: 20px;
-      gap: 10px;
 
       .part {
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        gap: 20px;
+
+        textarea,
+        label,
+        select,
+        input {
+          font-size: 1.4rem;
+          font-weight: 500;
+          letter-spacing: 4px;
+          width: 100%;
+          border-radius: 6px;
+        }
+
+        label {
+          margin-top: 10px;
+        }
+
+        .topicselect {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          label,
+          select,
+          input {
+            width: 100%;
+            height: 26px;
+            border-radius: 6px;
+          }
+
+          label {
+            margin-bottom: 30px;
+          }
+        }
+
+        button {
+          width: 100%;
+          padding: 10px;
+          margin-top: 30px;
+          text-transform: uppercase;
+          letter-spacing: 8px;
+          font-weight: 500;
+          border-radius: 12px;
+          border: none;
+          box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.369);
+        }
       }
 
       .ingredientelementa {
-        width: 100%;
         display: flex;
-        flex-direction: row;
-        gap: 10px;
+        flex-direction: column;
 
         .part {
-          display: flex;
-          flex-direction: column;
+          flex: 1;
+
+          button {
+            margin-top: 20px;
+          }
+          .topicselect {
+            p {
+              margin-top: 30px;
+            }
+          }
         }
       }
     }
   }
 }
+
+// REVIEW FORM ---------------------------------------------------------------------------------------------------------------
+
+.reviewformula {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: rgb(45, 45, 45);
+  color: white;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+
+  .top_section {
+    display: flex;
+    justify-content: space-between;
+
+    label {
+      font-weight: 500;
+      letter-spacing: 6px;
+      flex: 1;
+    }
+
+    .rating_section {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+
+      input[type="radio"] {
+        display: none;
+      }
+
+      input[type="radio"]:checked + label {
+        color: #ffaa00;
+      }
+
+      label {
+        font-weight: 500;
+        letter-spacing: 6px;
+        margin-bottom: 20px;
+        flex: 1;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      label:hover {
+        cursor: pointer;
+        transition: ease-in-out 0.3s;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 20px;
+  }
+
+  input {
+    text-transform: uppercase;
+    border-radius: 8px;
+    color: rgb(36, 36, 36);
+    letter-spacing: 8px;
+    font-weight: 400;
+    font-size: 1.4rem;
+  }
+}
+
+// MEDIA FORMAT ---------------------------------------------------------------------------------------------------------------
 
 @media screen and (max-width: 300px) {
   .drinkgrid {
@@ -317,11 +450,40 @@ body {
 }
 
 @media screen and (max-width: 500px) {
-  .row {
+  .top_section {
+    flex-direction: column;
+    label {
+      text-align: center;
+    }
+  }
+
+  .part {
+    width: 100%;
+    flex-direction: column;
+    align-self: start;
+    justify-content: flex-start;
+    .topicselect {
+      justify-content: flex-start;
+      width: 100%;
+    }
+    .addbutton {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+  .ingredientelementa {
+    display: flex;
     flex-direction: column;
 
-    .ingredientelementa {
-      flex-direction: column;
+    .part {
+      flex: 1;
+
+      button {
+        margin-top: 10px;
+      }
+      .topicselect {
+        height: auto;
+      }
     }
   }
 }

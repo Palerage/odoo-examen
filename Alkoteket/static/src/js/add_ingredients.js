@@ -5,13 +5,13 @@ function GenerateHtml(ingredient = "", amount = "") {
   index++;
   var htmlToAdd = `
     <div id="ingredientelement-${index}" class="ingredientelementa">
-      <div class="part">
-        <h4>Ingredient</h4>
-        <p>${ingredient}</p>
-      </div>
-      <div class="part">
-        <h4>Amount</h4>
-        <p>${amount}</p>
+      <div class="part">  
+        <div class="topicselect">
+          <input type="text" id="ingredient-${index}" name="ingredient" value="${ingredient}"/>
+        </div>
+        <div class="topicselect">
+          <input type="text" id="amount-${index}" name="amount" value="${amount}"/>
+        </div>
       </div>
       <div class="part">
         <button type="button" id="removebutton-${index}" onclick="removeElement(${index})">Remove</button> 
@@ -20,16 +20,53 @@ function GenerateHtml(ingredient = "", amount = "") {
   ingredientlistelement.prepend(htmlToAdd);
 }
 
+$("#drink-form").on("submit", function (event) {
+  event.preventDefault();
+
+  var drink_name = $("#drinkname").val();
+  // var drink_type = $("#drinktype").val();
+  var ingredients = [];
+  $("#add_ingredients .ingredientelementa").each(function () {
+    var ingredient_id = $(this).find("input[name=ingredient]").val();
+    var ingredient_amount = $(this).find("input[name=amount]").val();
+    ingredients.push({
+      ingredient_id: ingredient_id,
+      ingredient_amount: ingredient_amount,
+    });
+  });
+  var image = $("#img").val();
+
+  var formData = new FormData();
+  formData.append("drink_name", drink_name);
+  // formData.append("drink_type", drink_type);
+  formData.append("ingredients", JSON.stringify(ingredients));
+  formData.append("image", image);
+
+  $.ajax({
+    url: "/alkoteket/createdrink",
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      console.log("Drink created with ID " + data.drink_id);
+    },
+    error: function () {
+      console.log("Error creating drink");
+    },
+  });
+});
+
 // Load the options for the select element
 $.ajax({
-  url: "/alkoteket/ingredients",
+  url: "/alkoteket/ingredients?limit=100",
   type: "GET",
   dataType: "json",
   success: function (data) {
     var selectIngredient = $("#select_ingredient");
     $.each(data, function (index, value) {
       selectIngredient.append(
-        "<option value='" + value + "'>" + value + "</option>"
+        "<option value='" + value.id + "'>" + value.name + "</option>"
       );
     });
 
@@ -42,11 +79,11 @@ $.ajax({
 });
 
 function addElement() {
-  var ingredientInput = document.getElementById("select_ingredient");
+  var ingredientInput = document.getElementById("select2-chosen-1");
   var amountInput = document.getElementById("amountelement");
-  var ingredientValue = ingredientInput.value;
+  var ingredientValue = ingredientInput.innerHTML;
   var amountValue = amountInput.value;
-  ingredientInput.value = "";
+  // ingredientInput.value = "";
   amountInput.value = 4;
   GenerateHtml(ingredientValue, amountValue);
 }

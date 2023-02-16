@@ -34,6 +34,12 @@ class AlkoteketIngredientController(http.Controller):
         offset = int(offset)
         ingredients = request.env['alkoteket.ingredient'].sudo().search([], offset=offset, limit=limit)
         sorted_ingredients = sorted(ingredients, key=lambda x: x.name, reverse=False)
-        ingredient_names = [ingredient.name for ingredient in sorted_ingredients]        
-        return json.dumps(ingredient_names)
+        ingredient_objects = []
+        for ingredient in sorted_ingredients:
+            ingredient_objects.append({
+                'id': ingredient.id,
+                'name': ingredient.name,
+            })
+        # ingredient_names = [ingredient.name for ingredient in sorted_ingredients]
+        return json.dumps(ingredient_objects)
 

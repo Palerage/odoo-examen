@@ -45,6 +45,11 @@
                         <keywords>hero, jumbotron</keywords>
 
                     </t>
+                    <t t-snippet="Alkoteket.review_form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_banner.svg">
+
+                        <keywords>hero, jumbotron</keywords>
+
+                    </t>
 
 
                 </div>

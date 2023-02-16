@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>   
+
+    <template id="review_form" name="Review Form">
+
+        <section class="review-form container">
+
+            <form class="reviewformula">
+
+                <div class="top_section">
+
+                    <label for="myreview">Review</label>
+
+                    <div class="rating_section">
+                        <input type="radio" id="1" name="rating" value="1"/>
+                        <label for="1"><i class="bi-emoji-angry-fill"></i></label>
+
+                        <input type="radio" id="2" name="rating" value="2"/>
+                        <label for="2"><i class="bi-emoji-expressionless-fill"></i></label>
+
+                        <input type="radio" id="3" name="rating" value="3"/>
+                        <label for="3"><i class="bi-emoji-smile-fill"></i></label>
+
+                        <input type="radio" id="4" name="rating" value="4"/>
+                        <label for="4"><i class="bi-emoji-laughing-fill"></i></label>
+                        
+                        <input type="radio" id="5" name="rating" value="5"/>
+                        <label for="5"><i class="bi-emoji-heart-eyes-fill"></i></label>
+                    </div>
+                </div>
+                <textarea id="myreview" name="myreview"></textarea> 
+
+                <input type="submit" value="Commit"/>
+
+            </form>
+
+            <div id="review-form" class=""></div>
+
+            
+
+        </section>
+
+    </template>
+
+</odoo>
