@@ -229,7 +229,9 @@ class AlkoteketDrinkController(http.Controller):
     
     @http.route(['/alkoteket/createdrink'], type='http', auth='user', methods=['POST'], csrf=False)
     def create_drink(self, **kwargs):
-        _logger.error(f"---------------------KWARGS----------------------------{kwargs.get('ingredients')}")
+        _logger.error(f"---------------------KWARGS----------------------------{kwargs}")
+        
+        _logger.error(f"---------------------KWARGS-INGREDIENTS----------------------------{kwargs.get('ingredients')}")
         # https://www.w3docs.com/snippets/javascript/how-to-convert-the-image-into-a-base64-string-using-javascript.html
         drink_name = kwargs.get('drink_name')
         drink_type = 'alcoholic'# kwargs.get('drink_type')
