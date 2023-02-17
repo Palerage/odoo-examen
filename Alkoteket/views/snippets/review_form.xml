@@ -10,7 +10,7 @@
 
                 <div class="top_section">
 
-                    <label for="myreview">Review</label>
+                    <label for="myreview">Comment</label>
 
                     <div class="rating_section">
                         <input type="radio" id="1" name="rating" value="1"/>

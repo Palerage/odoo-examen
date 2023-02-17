@@ -16,7 +16,7 @@
                         <label for="img">Select image:</label>
                     </div>
                     <div class="part">
-                        <input type="file" id="img" name="img"/>
+                        <input type="file" id="img" name="img" accept="image/*"/>
                     </div>
                 </div>
 

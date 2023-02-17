@@ -20,23 +20,16 @@ if (window.location.pathname === "/browse") {
           <section class="drinkcontainer">
                 <a href="${"/drinkview?" + drink.id}">
                   <div class="box">
-                    <div class="bar">
-                    <div style="width:${
-                      drink.average_score * 20
-                    }%; background-color: ${
-            drink.average_score >= 3
-              ? "green"
-              : drink.average_score >= 1.1
-              ? "orange"
-              : "red"
-          }; height:inherit"></div>
-                    </div>
+                    <div class="img-gradient">
+                      <div class="smileyrating">
+                        <i class="bi-emoji-heart-eyes-fill"></i>
+                      </div>                 
                   `;
 
           drinkTemplate += `<img src="data:image/jpg;base64,${drink.image}"/>                    
                     
+                    </div>
                     <h5>${drink.name}</h5>
-                  
                   </div>
                 </a>
               </section>
@@ -80,17 +73,22 @@ if (window.location.pathname === "/browse") {
 
             filteredDrinks.forEach(function (drink) {
               var drinkTemplate = `
-                <a href="${"/drinkview?" + drink.id}">
-                  <div class="box">
+              <section class="drinkcontainer">
+              <a href="${"/drinkview?" + drink.id}">
+                <div class="box">
+                  <div class="img-gradient">
+                    <div class="smileyrating">
+                      <i class="bi-emoji-heart-eyes-fill"></i>
+                    </div>                 
+                `;
 
-                    <img src="data:image/jpg;base64,${
-                      drink.image
-                    }"/>                    
-                    
-                    <h5>${drink.name}</h5>
+              drinkTemplate += `<img src="data:image/jpg;base64,${drink.image}"/>                    
                   
                   </div>
-                </a>
+                  <h5>${drink.name}</h5>
+                </div>
+              </a>
+            </section>
               `;
               document
                 .querySelector("#show-drinks")
@@ -99,4 +97,18 @@ if (window.location.pathname === "/browse") {
           });
       });
   });
+}
+
+{
+  /* <div class="bar">
+                    <div style="width:${
+                      drink.average_score * 20
+                    }%; background-color: ${
+            drink.average_score >= 3
+              ? "green"
+              : drink.average_score >= 1.1
+              ? "orange"
+              : "red"
+          }; height:inherit"></div>
+                    </div> */
 }

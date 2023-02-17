@@ -55,11 +55,15 @@ class AlkoteketDrink(models.Model):
         for record in self:
             numberOfReviews = 0
             totalPoints = 0
-            for review in record.drink_review_ids:
-                numberOfReviews += 1
-                totalPoints += review.score
-            if numberOfReviews != 0:
-                record.average_score = round(totalPoints / numberOfReviews, 2)
+            if record.drink_review_ids:
+                
+                for review in record.drink_review_ids:
+                    numberOfReviews += 1
+                    totalPoints += review.score
+                if numberOfReviews != 0:
+                    record.average_score = round(totalPoints / numberOfReviews, 2)
+            else:
+                record.average_score = 0
         
     @api.depends('ingredient_amount_ids')
     def _compute_total_volume(self):

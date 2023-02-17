@@ -17,11 +17,11 @@ if (window.location.pathname === "/profile") {
         var drinkTemplate = `
                       <a href="${"/drinkview?" + drink.id}">
                         <div class="box">
-      
-                        <img src="data:image/jpg;base64,${
-                          drink.image
-                        }"/>                    
-                        
+                          <div class="img-gradient"> 
+                            <img src="data:image/jpg;base64,${
+                              drink.image
+                            }"/>                    
+                          </div>
                         <h5>${drink.name}</h5>
                         
                         </div>

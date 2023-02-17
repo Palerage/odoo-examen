@@ -24,37 +24,45 @@ $("#drink-form").on("submit", function (event) {
   event.preventDefault();
 
   var drink_name = $("#drinkname").val();
+  var note = $("#subject").val();
   // var drink_type = $("#drinktype").val();
   var ingredients = [];
   $("#add_ingredients .ingredientelementa").each(function () {
-    var ingredient_id = $(this).find("input[name=ingredient]").data('id');
+    var ingredient_id = $(this).find("input[name=ingredient]").data("id");
     var ingredient_amount = $(this).find("input[name=amount]").val();
     ingredients.push({
       ingredient_id: ingredient_id,
       ingredient_amount: ingredient_amount,
     });
   });
-  var image = $("#img").val();
 
-  var formData = new FormData();
-  formData.append("drink_name", drink_name);
-  // formData.append("drink_type", drink_type);
-  formData.append("ingredients", JSON.stringify(ingredients));
-  formData.append("image", image);
+  // read the contents of the file and convert to base64 string
+  var reader = new FileReader();
+  reader.onload = function () {
+    var image = reader.result.split(",")[1];
 
-  $.ajax({
-    url: "/alkoteket/createdrink",
-    type: "POST",
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function (data) {
-      console.log("Drink created with ID " + data.drink_id);
-    },
-    error: function () {
-      console.log("Error creating drink");
-    },
-  });
+    var formData = new FormData();
+    formData.append("drink_name", drink_name);
+    formData.append("ingredients", JSON.stringify(ingredients));
+    formData.append("image", image);
+    formData.append("note", note);
+
+    $.ajax({
+      url: "/alkoteket/createdrink",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        console.log("Drink created with ID " + data.drink_id);
+        window.location.href = "/drinkview?" + data.drink_id; // replace with your desired URL
+      },
+      error: function () {
+        console.log("Error creating drink");
+      },
+    });
+  };
+  reader.readAsDataURL($("#img")[0].files[0]);
 });
 
 // Load the options for the select element
@@ -83,7 +91,7 @@ function addElement() {
   var amountInput = document.getElementById("amountelement");
   var ingredientValue = ingredientInput.innerHTML;
   var amountValue = amountInput.value;
-  var ingredient_id = $('#select_ingredient').val();
+  var ingredient_id = $("#select_ingredient").val();
   // ingredientInput.value = "";
   amountInput.value = 4;
   GenerateHtml(ingredientValue, amountValue, ingredient_id);

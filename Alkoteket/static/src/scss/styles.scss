@@ -1,8 +1,20 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
-
+// DROPDOWN LOGIN---------------------------------------------------------------------------------------------------------------
+.dropdown-menu {
+  .dropdown-divider {
+    display: none;
+  }
+  .dropdown-item:first-child {
+    display: none;
+  }
+}
 // BROWSE PAGE---------------------------------------------------------------------------------------------------------------
 
 header {
+  .navbar {
+    box-shadow: 0 0 14px 4px rgba(0, 0, 0, 0.547) !important;
+  }
+
   .navbar-brand.logo {
     img {
       object-fit: contain;
@@ -16,6 +28,7 @@ header {
     letter-spacing: 2px;
   }
 }
+main,
 body {
   background: linear-gradient(
     180deg,
@@ -38,12 +51,12 @@ body {
   background-color: rgb(233, 242, 232);
   box-shadow: 0 0 10px 4px rgba(54, 54, 54, 0.05);
   display: flex;
-  border-radius: 10px;
   justify-content: flex-end;
   margin-bottom: 20px;
   align-items: center;
   padding: 10px;
   gap: 10px;
+  margin-top: 20px;
 
   h3 {
     margin-top: 6px;
@@ -52,7 +65,6 @@ body {
 
   #search-input {
     font-size: 1.2rem;
-    border-radius: 8px;
     max-width: 30vw;
     min-width: 40%;
     border: 1px solid rgb(184, 184, 184);
@@ -79,18 +91,52 @@ body {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 20px;
+      padding: 8px 4px 0px 4px;
       border-radius: 10px;
       background-color: rgb(233, 242, 232);
       box-shadow: 0 0 10px 4px rgba(54, 54, 54, 0.05);
-      height: 366px;
+      height: 352px;
       overflow: hidden;
 
-      img {
+      .img-gradient {
+        position: relative; /* Set position relative to make sure the absolute positioned gradient layer stays inside the container */
+      }
+
+      .smileyrating {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 5;
+
+        i {
+          text-shadow: -1px 0 rgba(255, 136, 0, 0.2),
+            0 1px rgba(255, 136, 0, 0.2), 1px 0 rgba(255, 136, 0, 0.2),
+            0 -1px rgba(255, 136, 0, 0.2);
+          padding-right: 8px;
+        }
+      }
+
+      .img-gradient::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          rgba(41, 91, 79, 0.6),
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0)
+        ); /* Set your desired gradient */
+        z-index: 1; /* Make sure the gradient layer stays on top of the image */
+      }
+
+      .img-gradient img {
         height: 300px;
         width: 100%;
         object-fit: cover;
-        padding: 10px;
+        z-index: 2; /* Make sure the image stays on top of the gradient layer */
       }
 
       h5 {
@@ -284,6 +330,7 @@ body {
 .create-drink {
   display: flex;
   justify-content: center;
+  align-items: center;
 
   form {
     display: flex;
@@ -291,10 +338,11 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 400;
     letter-spacing: 4px;
-    max-width: 1000px;
+    max-width: 800px;
+    margin-top: 40px;
 
     .col {
       display: flex;
@@ -307,9 +355,9 @@ body {
       );
       color: white;
       box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.369);
-      padding: 15px 30px;
+      padding: 0px 30px 15px 30px;
       border-radius: 12px;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
 
       .submitButton {
         text-transform: uppercase;
@@ -369,7 +417,6 @@ body {
           background-color: rgb(177, 255, 128);
           letter-spacing: 8px;
           font-weight: 400;
-          font-size: 1.4rem;
           width: 100%;
           margin-top: 30px;
           border: none;
@@ -436,7 +483,7 @@ body {
       }
 
       input[type="radio"]:checked + label {
-        color: #e6b24c;
+        color: #ffb726;
       }
 
       label {
@@ -462,6 +509,7 @@ body {
     border-radius: 12px;
     padding: 8px;
     margin-bottom: 20px;
+    font-size: 1.3rem;
   }
 
   input {
