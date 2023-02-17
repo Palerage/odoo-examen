@@ -29,7 +29,8 @@
                         <label for="5"><i class="bi-emoji-heart-eyes-fill"></i></label>
                     </div>
                 </div>
-                <textarea id="myreview" name="myreview"></textarea> 
+
+                <textarea id="myreview" name="myreview"></textarea>
 
                 <input type="submit" value="Commit"/>
 

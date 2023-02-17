@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="part">
-                        <button type="button" id="addbutton" onclick="addElement(0)">Add</button> 
+                        <button type="button" id="addbutton" onclick="addElement()">Add</button> 
                     </div>
                 </div>
 

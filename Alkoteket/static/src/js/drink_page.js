@@ -88,30 +88,6 @@ if (window.location.pathname === "/drinkview") {
                       </div>                      
                     </section>                  
                       `;
-
-        //               <section class="review">
-        //               <h4 style="padding: 20px;">Reviews</h4>
-        // // for (let index = 0; index < drink.reviews.length; index++) {
-        //   const element = drink.reviews[index];
-
-        //   drinkTemplate += `
-        //   <div class="reviewbox">
-        //     <div class="reviewtop">
-        //      <a href="${"/profile?" + drink.creator_id}">
-        //       <h5>${element.reviewer_name}</h5>
-        //      </a>
-        //       <p>Score: ${element.score} / 5</p>
-        //     </div>
-        //     <div class="reviewfield">
-        //       <p>${element.review}</p>
-        //     </div>
-        //   </div>
-        //   `;
-        // }
-
-        // drinkTemplate += `
-        //           </section>
-        //           `;
         document
           .querySelector("#drink-page")
           .insertAdjacentHTML("beforeend", drinkTemplate);
