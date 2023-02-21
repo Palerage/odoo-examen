@@ -16,6 +16,7 @@
                         <label for="img">Select image:</label>
                     </div>
                     <div class="part">
+                        <img id="preview" style="display:none;" src="" alt="Image Preview"/>
                         <input type="file" id="img" name="img" accept="image/*"/>
                     </div>
                 </div>
