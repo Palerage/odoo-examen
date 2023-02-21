@@ -34,7 +34,7 @@ if (window.location.pathname === "/profile") {
 
       // Create the h3 element
       var h3 = document.createElement("h3");
-      h3.innerHTML = "Drinks" + " (" + count + ")";
+      h3.innerHTML = "My Drinks" + " (" + count + ")";
       h3.style.display = "inline-block";
 
       // Create the toggle button

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>   
+
+    <template id="profile_info" name="Profile Info">
+
+        <section class="profile-info container">
+
+            <div id="profile-info" class=""></div>
+            <h1>XML PROFILE</h1>
+
+        </section>
+
+    </template>
+
+</odoo>

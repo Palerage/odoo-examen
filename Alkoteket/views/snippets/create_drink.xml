@@ -20,6 +20,10 @@
                     </div>
                 </div>
 
+                <div class="rubrik">
+                    <h3>Search Ingredients</h3>
+                </div>
+
                 <div class="col">
                     <div class="part">
                         <div class="topicselect">
@@ -35,8 +39,14 @@
                         <button type="button" id="addbutton" onclick="addElement()">Add</button> 
                     </div>
                 </div>
+                
+                <div class="rubrik">
+                    <h3>Current Ingredients</h3>
+                    <h3>(</h3>
+                    <h3 id="ingredientcounter"></h3>
+                    <h3>)</h3>
+                </div>
 
-               
                 <div id="add_ingredients" class="col"></div>
                 
                 <div class="col">
