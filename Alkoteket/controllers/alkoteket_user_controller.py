@@ -32,3 +32,4 @@ class UserController(http.Controller):
         }
         
         return json.dumps(data)
+

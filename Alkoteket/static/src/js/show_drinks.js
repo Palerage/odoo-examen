@@ -20,23 +20,13 @@ if (window.location.pathname === "/browse") {
           <section class="drinkcontainer">
                 <a href="${"/drinkview?" + drink.id}">
                   <div class="box">
-                    <div class="bar">
-                    <div style="width:${
-                      drink.average_score * 20
-                    }%; background-color: ${
-            drink.average_score >= 3
-              ? "green"
-              : drink.average_score >= 1.1
-              ? "orange"
-              : "red"
-          }; height:inherit"></div>
-                    </div>
+                    <div class="img-gradient">
                   `;
 
           drinkTemplate += `<img src="data:image/jpg;base64,${drink.image}"/>                    
                     
+                    </div>
                     <h5>${drink.name}</h5>
-                  
                   </div>
                 </a>
               </section>
@@ -48,13 +38,16 @@ if (window.location.pathname === "/browse") {
 
         // Add search bar and filter function
         var searchContainer = document.createElement("div");
-        var searchTitle = document.createElement("h3");
+        // var searchTitle = document.createElement("h3");
+        var searchIcon = document.createElement("i");
         var searchBar = document.createElement("input");
-        searchTitle.innerHTML = "Search: ";
+        // searchTitle.innerHTML = "Search: ";
         searchContainer.setAttribute("class", "searchcontainer");
+        searchIcon.classList.add("bi", "bi-search");
         searchBar.setAttribute("type", "text");
         searchBar.setAttribute("id", "search-input");
-        searchContainer.appendChild(searchTitle);
+        // searchContainer.appendChild(searchTitle);
+        searchContainer.appendChild(searchIcon);
         searchContainer.appendChild(searchBar);
         document
           .querySelector("#searchfield")
@@ -80,17 +73,19 @@ if (window.location.pathname === "/browse") {
 
             filteredDrinks.forEach(function (drink) {
               var drinkTemplate = `
-                <a href="${"/drinkview?" + drink.id}">
-                  <div class="box">
+              <section class="drinkcontainer">
+              <a href="${"/drinkview?" + drink.id}">
+                <div class="box">
+                  <div class="img-gradient">
+                `;
 
-                    <img src="data:image/jpg;base64,${
-                      drink.image
-                    }"/>                    
-                    
-                    <h5>${drink.name}</h5>
+              drinkTemplate += `<img src="data:image/jpg;base64,${drink.image}"/>                    
                   
                   </div>
-                </a>
+                  <h5>${drink.name}</h5>
+                </div>
+              </a>
+            </section>
               `;
               document
                 .querySelector("#show-drinks")

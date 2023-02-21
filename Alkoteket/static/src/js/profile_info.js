@@ -11,11 +11,9 @@ console.log("This is outside the profile_info module!");
     if (id === undefined) {
       id = 0;
     }
-
     ajax.rpc("/users/" + id).then(function (data) {
       console.log("Inside ajax")
       console.log(data)
-
         try {
           // Parse the JSON response
           var userData = JSON.parse(data);
@@ -30,7 +28,6 @@ console.log("This is outside the profile_info module!");
         <img src="data:image/jpg;base64,${userData.image_1920}" alt="User Image">
         <!-- Add additional fields as needed -->
       `;
- 
           // Insert the profile HTML into the element with id="profile-info"
           var profileInfoElem = document.getElementById("profile-info");
           if (profileInfoElem) {
@@ -45,7 +42,6 @@ console.log("This is outside the profile_info module!");
       .catch(function (error) {
         console.error("Error retrieving user data:", error);
       });
-
     // ajax
     //   .get("/users/" + id, {})
     //   .then(function (data) {

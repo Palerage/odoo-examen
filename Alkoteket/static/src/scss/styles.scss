@@ -1,7 +1,46 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+// DROPDOWN LOGIN---------------------------------------------------------------------------------------------------------------
+// .dropdown-menu {
+//   .dropdown-divider {
+//     display: none;
+//   }
+//   .dropdown-item:first-child {
+//     display: none;
+//   }
+// }
 
+.img-thumbnail {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}
 // BROWSE PAGE---------------------------------------------------------------------------------------------------------------
+
+header {
+  .navbar {
+    box-shadow: 0 0 14px 4px rgba(0, 0, 0, 0.547) !important;
+  }
+
+  .navbar-brand.logo {
+    img {
+      object-fit: contain;
+      display: block;
+      width: auto;
+      height: 5rem;
+    }
+  }
+  .nav-link {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+}
+main,
 body {
+  background: linear-gradient(
+    180deg,
+    rgb(242, 242, 242) 0%,
+    rgb(172, 199, 187) 100%
+  );
+
   a {
     color: orange;
     text-decoration: none;
@@ -12,14 +51,22 @@ body {
     }
   }
 }
+
 .searchcontainer {
-  background-color: rgb(248, 248, 248);
+  background-color: rgb(233, 242, 232);
+  box-shadow: 0 0 10px 4px rgba(54, 54, 54, 0.05);
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
   align-items: center;
   padding: 10px;
   gap: 10px;
+  margin-top: 20px;
+
+  .bi-search {
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
 
   h3 {
     margin-top: 6px;
@@ -28,7 +75,6 @@ body {
 
   #search-input {
     font-size: 1.2rem;
-    border-radius: 8px;
     max-width: 30vw;
     min-width: 40%;
     border: 1px solid rgb(184, 184, 184);
@@ -37,8 +83,8 @@ body {
 .drinkgrid {
   display: grid;
   justify-content: center;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
   margin-bottom: 40px;
 
   .searchContainer {
@@ -55,18 +101,38 @@ body {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: rgb(248, 248, 248);
+      padding: 6px 4px 0px 4px;
+      background-color: rgb(233, 242, 232);
       box-shadow: 0 0 10px 4px rgba(54, 54, 54, 0.05);
-      height: 368px;
+      border-radius: 4px;
+      height: 298px;
       overflow: hidden;
 
-      img {
-        height: 300px;
+      .img-gradient {
+        position: relative;
+      }
+
+      .img-gradient::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          rgba(41, 91, 79, 0.6),
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0)
+        ); /* Set your desired gradient */
+        z-index: 1; /* Make sure the gradient layer stays on top of the image */
+      }
+
+      .img-gradient img {
+        height: 240px;
         width: 100%;
         object-fit: cover;
-        padding: 10px;
+        z-index: 2;
       }
 
       h5 {
@@ -96,10 +162,10 @@ body {
 .drinkcontainer {
   margin-top: 20px;
   width: 100%;
-  background-color: rgb(248, 248, 248);
+  background-color: rgba(248, 248, 248, 0.4);
 
   h4 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     letter-spacing: 6px;
   }
 
@@ -110,7 +176,7 @@ body {
 
   .receptgrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 
     .receptbox {
       padding: 20px;
@@ -229,6 +295,10 @@ body {
   border-bottom: rgb(110, 110, 110) solid 1px;
   margin-bottom: 20px;
 
+  h3 {
+    font-size: 1.2rem !important;
+  }
+
   button {
     background-color: rgba(0, 0, 0, 0);
     color: rgb(40, 40, 40);
@@ -236,7 +306,7 @@ body {
   }
 
   i {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 }
 #profile-drinks {
@@ -251,11 +321,275 @@ body {
   }
 }
 
+// CREATE PAGE---------------------------------------------------------------------------------------------------------------
+
+.create-drink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 4px;
+    max-width: 800px;
+    margin-top: 40px;
+
+    .rubrik {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h3 {
+        font-size: 1.4rem;
+        margin-right: 6px;
+      }
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(
+        180deg,
+        rgba(82, 165, 146, 0.8) 0%,
+        rgba(41, 91, 79, 0.8) 100%
+      );
+      color: white;
+      box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.369);
+      padding: 0px 30px 15px 30px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+
+      .submitButton {
+        text-transform: uppercase;
+        border-radius: 8px;
+        color: rgb(36, 36, 36);
+        letter-spacing: 8px;
+        margin-top: 20px;
+        border: none;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.369);
+      }
+
+      .part {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        gap: 20px;
+
+        textarea,
+        label,
+        select,
+        input {
+          letter-spacing: 2px;
+          width: 100%;
+          border-radius: 6px;
+          padding: 6px;
+        }
+
+        label {
+          font-weight: 400;
+          margin-top: 10px;
+        }
+
+        .topicselect {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          label,
+          select,
+          input {
+            width: 100%;
+            height: 26px;
+            border-radius: 6px;
+            padding: 6px;
+          }
+
+          label {
+            margin-bottom: 30px;
+          }
+        }
+
+        button {
+          text-transform: uppercase;
+          border-radius: 8px;
+          color: rgb(36, 36, 36);
+          background-color: rgb(177, 255, 128);
+          letter-spacing: 8px;
+          font-weight: 400;
+          width: 100%;
+          margin-top: 30px;
+          border: none;
+          box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.369);
+        }
+      }
+
+      .ingredientelementa {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+
+        .part {
+          flex: 1;
+
+          button {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background-color: rgb(255, 128, 128);
+          }
+          .topicselect {
+            p {
+              margin-top: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// REVIEW FORM ---------------------------------------------------------------------------------------------------------------
+
+.reviewformula {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(82, 165, 146, 0.8) 0%,
+    rgba(41, 91, 79, 0.8) 100%
+  );
+  color: white;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+
+  .top_section {
+    display: flex;
+    justify-content: space-between;
+
+    label {
+      font-weight: 500;
+      letter-spacing: 6px;
+      flex: 1;
+    }
+
+    .rating_section {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+
+      input[type="radio"] {
+        display: none;
+      }
+
+      input[type="radio"]:checked + label {
+        color: #ffb726;
+      }
+
+      label {
+        font-weight: 500;
+        letter-spacing: 6px;
+        margin-bottom: 20px;
+        flex: 1;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      label:hover {
+        cursor: pointer;
+        transition: ease-in-out 0.3s;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+  }
+
+  input {
+    text-transform: uppercase;
+    border-radius: 8px;
+    color: rgb(36, 36, 36);
+    letter-spacing: 8px;
+    font-weight: 400;
+    font-size: 1.4rem;
+  }
+}
+
+// MEDIA FORMAT ---------------------------------------------------------------------------------------------------------------
+
 @media screen and (max-width: 300px) {
   .drinkgrid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
   .receptgrid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .top_section {
+    flex-direction: column;
+    label {
+      text-align: center;
+    }
+  }
+
+  .searchcontainer {
+    justify-content: center;
+
+    #search-input {
+      min-width: 80%;
+    }
+  }
+  .part {
+    width: 100%;
+    flex-direction: column;
+    align-self: start;
+    justify-content: flex-start;
+    .topicselect {
+      justify-content: flex-start;
+      width: 100%;
+    }
+    .addbutton {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+  .create-drink {
+    form {
+      font-size: 1rem;
+      .col {
+        padding: 15px 15px;
+      }
+    }
+    .ingredientelementa {
+      display: flex;
+      flex-direction: column;
+
+      .part {
+        flex: 1;
+
+        button {
+          margin-top: 10px;
+        }
+        .topicselect {
+          height: auto;
+        }
+      }
+    }
   }
 }

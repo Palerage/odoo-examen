@@ -17,11 +17,11 @@ if (window.location.pathname === "/profile") {
         var drinkTemplate = `
                       <a href="${"/drinkview?" + drink.id}">
                         <div class="box">
-      
-                        <img src="data:image/jpg;base64,${
-                          drink.image
-                        }"/>                    
-                        
+                          <div class="img-gradient"> 
+                            <img src="data:image/jpg;base64,${
+                              drink.image
+                            }"/>                    
+                          </div>
                         <h5>${drink.name}</h5>
                         
                         </div>
@@ -34,7 +34,7 @@ if (window.location.pathname === "/profile") {
 
       // Create the h3 element
       var h3 = document.createElement("h3");
-      h3.innerHTML = "Drinks" + " (" + count + ")";
+      h3.innerHTML = "My Drinks" + " (" + count + ")";
       h3.style.display = "inline-block";
 
       // Create the toggle button

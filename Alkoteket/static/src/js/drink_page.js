@@ -1,20 +1,19 @@
 if (window.location.pathname === "/drinkview") {
-
   odoo.define("drink_page", function (require) {
     var ajax = require("web.ajax");
 
     id = window.location.search.split("?")[1];
 
-    function AddToFavourite(){
+    function AddToFavourite() {
       ajax.rpc("/alkoteket/addfavourite/" + id).then(function (data) {
-        console.log("Added")
-        });
+        console.log("Added");
+      });
     }
 
-    function RemoveFavourite(){
+    function RemoveFavourite() {
       ajax.rpc("/alkoteket/removefavourite/" + id).then(function (data) {
-        console.log("Removed")
-        });
+        console.log("Removed");
+      });
     }
 
     console.log(id);
@@ -87,32 +86,8 @@ if (window.location.pathname === "/drinkview") {
                           <p>${drink.note}</p>
                         </div>                        
                       </div>                      
-                    </section>
-                  <section class="review">
-                      <h4 style="padding: 20px;">Reviews</h4>
+                    </section>                  
                       `;
-
-        for (let index = 0; index < drink.reviews.length; index++) {
-          const element = drink.reviews[index];
-
-          drinkTemplate += `
-          <div class="reviewbox">
-            <div class="reviewtop">
-             <a href="${"/profile?" + drink.creator_id}">
-              <h5>${element.reviewer_name}</h5>
-             </a>
-              <p>Score: ${element.score} / 5</p>
-            </div>
-            <div class="reviewfield">
-              <p>${element.review}</p>
-            </div>
-          </div>
-          `;
-        }
-
-        drinkTemplate += `
-                  </section>
-                  `;
         document
           .querySelector("#drink-page")
           .insertAdjacentHTML("beforeend", drinkTemplate);
@@ -130,24 +105,22 @@ if (window.location.pathname === "/drinkview") {
         const icon1 = document.getElementById("icon-1");
         const icon2 = document.getElementById("icon-2");
 
-        if (drink.favourite == false){
+        if (drink.favourite == false) {
           icon2.style.display = "none";
           icon1.style.display = "inline-block";
-        }
-
-        else {
+        } else {
           icon1.style.display = "none";
           icon2.style.display = "inline-block";
         }
 
         icon1.addEventListener("click", function () {
-          AddToFavourite()
+          AddToFavourite();
           icon1.style.display = "none";
           icon2.style.display = "inline-block";
         });
 
         icon2.addEventListener("click", function () {
-          RemoveFavourite()
+          RemoveFavourite();
           icon2.style.display = "none";
           icon1.style.display = "inline-block";
         });

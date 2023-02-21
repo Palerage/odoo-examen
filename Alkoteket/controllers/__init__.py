@@ -1,1 +1,1 @@
-from . import alkoteket_drink_controller, alkoteket_ingredient_controller
+from . import alkoteket_drink_controller, alkoteket_ingredient_controller, alkoteket_user_controller

@@ -18,7 +18,7 @@ class AlkoteketDrink(models.Model):
     type = fields.Selection([
         ('alcoholic', 'Alcoholic'),
         ('nonalcoholic', 'Non-Alcoholic')
-    ], required=True, default='alcoholic') #, store=True, compute='_compute_alcohol_content'
+    ],  default='alcoholic') #, store=True, compute='_compute_alcohol_content'
     note = fields.Text(string='Instructions')
     ingredient_amount_ids = fields.One2many('alkoteket.ingredient.amount', 'drink_id',
                                             string="Ingredients",
@@ -55,11 +55,15 @@ class AlkoteketDrink(models.Model):
         for record in self:
             numberOfReviews = 0
             totalPoints = 0
-            for review in record.drink_review_ids:
-                numberOfReviews += 1
-                totalPoints += review.score
-            if numberOfReviews != 0:
-                record.average_score = round(totalPoints / numberOfReviews, 2)
+            if record.drink_review_ids:
+                
+                for review in record.drink_review_ids:
+                    numberOfReviews += 1
+                    totalPoints += review.score
+                if numberOfReviews != 0:
+                    record.average_score = round(totalPoints / numberOfReviews, 2)
+            else:
+                record.average_score = 0
         
     @api.depends('ingredient_amount_ids')
     def _compute_total_volume(self):
