@@ -1,12 +1,17 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 // DROPDOWN LOGIN---------------------------------------------------------------------------------------------------------------
-.dropdown-menu {
-  .dropdown-divider {
-    display: none;
-  }
-  .dropdown-item:first-child {
-    display: none;
-  }
+// .dropdown-menu {
+//   .dropdown-divider {
+//     display: none;
+//   }
+//   .dropdown-item:first-child {
+//     display: none;
+//   }
+// }
+
+.img-thumbnail {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
 }
 // BROWSE PAGE---------------------------------------------------------------------------------------------------------------
 
@@ -58,6 +63,11 @@ body {
   gap: 10px;
   margin-top: 20px;
 
+  .bi-search {
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+
   h3 {
     margin-top: 6px;
     font-size: 1.2rem;
@@ -73,8 +83,8 @@ body {
 .drinkgrid {
   display: grid;
   justify-content: center;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 320px));
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
   margin-bottom: 40px;
 
   .searchContainer {
@@ -91,29 +101,15 @@ body {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 4px 0px 4px;
-      border-radius: 10px;
+      padding: 6px 4px 0px 4px;
       background-color: rgb(233, 242, 232);
       box-shadow: 0 0 10px 4px rgba(54, 54, 54, 0.05);
-      height: 352px;
+      border-radius: 4px;
+      height: 298px;
       overflow: hidden;
 
       .img-gradient {
-        position: relative; /* Set position relative to make sure the absolute positioned gradient layer stays inside the container */
-      }
-
-      .smileyrating {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 5;
-
-        i {
-          text-shadow: -1px 0 rgba(255, 136, 0, 0.2),
-            0 1px rgba(255, 136, 0, 0.2), 1px 0 rgba(255, 136, 0, 0.2),
-            0 -1px rgba(255, 136, 0, 0.2);
-          padding-right: 8px;
-        }
+        position: relative;
       }
 
       .img-gradient::before {
@@ -133,10 +129,10 @@ body {
       }
 
       .img-gradient img {
-        height: 300px;
+        height: 240px;
         width: 100%;
         object-fit: cover;
-        z-index: 2; /* Make sure the image stays on top of the gradient layer */
+        z-index: 2;
       }
 
       h5 {
@@ -344,6 +340,17 @@ body {
     max-width: 800px;
     margin-top: 40px;
 
+    .rubrik {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h3 {
+        font-size: 1.4rem;
+        margin-right: 6px;
+      }
+    }
+
     .col {
       display: flex;
       flex-direction: column;
@@ -541,6 +548,13 @@ body {
     }
   }
 
+  .searchcontainer {
+    justify-content: center;
+
+    #search-input {
+      min-width: 80%;
+    }
+  }
   .part {
     width: 100%;
     flex-direction: column;
