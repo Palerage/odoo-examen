@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 class UserController(http.Controller):
     name = "alkoteket.user.api"
     
-    @http.route('/users/<int:user_id>', type="http", methods=['GET'], auth='public')
+    @http.route('/users/<int:user_id>', type="json", methods=['POST'], auth='public')
     def user_profile(self, user_id):
         _logger.error("-----------------------------USER--------------------------------------")
         if(user_id == 0):
@@ -27,8 +27,9 @@ class UserController(http.Controller):
             'active': user.active,
             'name': user.name,
             'email': user.email,
-            'login_date': user.login_date,
-            'image_1920': user.image_1920,
+            'login_date': str(user.login_date),
+            'image_1920': str(user.image_1920)[2:-1],
         }
         
-        return data
+        return json.dumps(data)
+
