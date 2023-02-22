@@ -242,7 +242,7 @@ class AlkoteketDrinkController(http.Controller):
         user_id = request.env.user.id
 
         drink = request.env['alkoteket.drink'].sudo().create({
-            'name': str(drink_name),
+            'name': str(drink_name.title()),
             'type': str(drink_type),
             'created_by_id': str(user_id),
             'note': str(note),

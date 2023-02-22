@@ -6,8 +6,7 @@
 
         <section class="profile-info container">
 
-            <div id="profile-info" class=""></div>
-            <h1>XML PROFILE</h1>
+            <div id="profile-info" class="profile-infos"></div>
 
         </section>
 

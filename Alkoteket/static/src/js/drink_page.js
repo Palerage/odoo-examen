@@ -54,9 +54,9 @@ if (window.location.pathname === "/drinkview") {
                         <div class ="receptbox">
                         <h4>Rating</h4>
                         <hr>
-                        <div class="bar">
-                          <div class="fill" id="fill"></div>
-                        </div>
+                        <!-- <div class="bar">
+                           <div class="fill" id="fill"></div>
+                           </div> -->
                           <div class="drinkfacts">
                             <p style="font-style: italic; color:grey;">Reviews: ${
                               drink.review_amount
@@ -91,16 +91,6 @@ if (window.location.pathname === "/drinkview") {
         document
           .querySelector("#drink-page")
           .insertAdjacentHTML("beforeend", drinkTemplate);
-
-        const fill = document.getElementById("fill");
-        fill.style.width = drink.average_score * 20 + "%";
-        if (drink.average_score < 2) {
-          fill.style.backgroundColor = "red";
-        } else if (drink.average_score < 3) {
-          fill.style.backgroundColor = "orange";
-        } else {
-          fill.style.backgroundColor = "green";
-        }
 
         const icon1 = document.getElementById("icon-1");
         const icon2 = document.getElementById("icon-2");
