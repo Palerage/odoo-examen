@@ -27,7 +27,7 @@ class UserController(http.Controller):
             'active': user.active,
             'name': user.name,
             'email': user.email,
-            'login_date': str(user.login_date),
+            'login_date': str(user.login_date.strftime("%Y-%m-%d %H:%M")),
             'image_1920': str(user.image_1920)[2:-1],
         }
         

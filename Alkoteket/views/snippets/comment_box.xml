@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>   
+
+    <template id="comment_box" name="Comment Box">
+
+        <section class="comment-box container">
+
+            <div id="drink-box" class=""></div>
+
+        </section>
+
+    </template>
+
+</odoo>
