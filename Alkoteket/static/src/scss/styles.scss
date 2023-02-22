@@ -467,6 +467,12 @@ body {
         }
       }
 
+      .imagesection {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start;
+      }
+
       .ingredientelementa {
         display: flex;
         flex-direction: column;
