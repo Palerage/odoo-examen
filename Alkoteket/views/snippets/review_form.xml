@@ -2,7 +2,7 @@
 <odoo>   
     <template id="review_form" name="Review Form">
         <section class="review-form container">
-            <form class="reviewformula">
+            <form class="reviewformula" id="review-form">
                 <div class="top_section">
                     <h3>Comment</h3>
                     <div class="rating_section">
@@ -14,9 +14,8 @@
                     </div>
                 </div>
                 <textarea id="myreview" name="myreview"></textarea>
-                <input type="submit" value="Commit"/>
+                <input id="reviewsubmit" disabled="" type="submit" value="Commit"/>
             </form>
-            <div id="review-form" class=""></div>
         </section>
     </template>
 </odoo>

@@ -8,7 +8,7 @@ class AlkoteketDrinkReview(models.Model):
     _name = "alkoteket.drink.review"
     _description = "Review"
     
-    # user_id = fields.Many2one('res.users', string='User')
+    created_by_id = fields.Many2one('res.users', string='Reviewer')
     score = fields.Integer(string="Score")
     review = fields.Text(string="Review")
     drink_id = fields.Many2one("alkoteket.drink", string="Drink")
@@ -26,9 +26,8 @@ class AlkoteketDrinkReview(models.Model):
         review = super().create(vals)
         return review
     
-    @api.model
-    def write(self, vals):
-        _logger.error(f"Vals:-------------------{vals}")
-        _logger.error(f"Self:-------------------{self}")
-        review = super().write(vals)
-        return review
+    # @api.model
+    # def write(self, vals):
+    #     _logger.error(f"Vals:-------------------{vals}")
+    #     review = super().write(vals)
+    #     return review

@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="id"/>
+                <field name="created_by_id"/>
                 <field name="drink_id"/>
                 <field name="score"/>
                 <field name="review"/>
@@ -25,6 +26,7 @@
                     <div class="oe_title">
                     </div>
                     <group>
+                        <field name="created_by_id"/>
                         <field name="score"/>
                         <field name="review"/>
                     </group>
