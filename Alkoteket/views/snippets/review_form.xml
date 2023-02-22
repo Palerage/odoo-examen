@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <textarea id="myreview" name="myreview"></textarea>
-                <input id="reviewsubmit" disabled="" type="submit" value="Commit"/>
+                <input id="reviewsubmit" disabled="" type="submit" value="SUBMIT"/>
             </form>
         </section>
     </template>

@@ -6,6 +6,7 @@
 
         <section class="drink-page container">
 
+            <p>drinkpage</p>
             <div id="drink-page" class=""></div>
 
         </section>

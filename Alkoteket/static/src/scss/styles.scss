@@ -534,7 +534,7 @@ body {
       .fa-star {
         color: #ffaa00;
       }
-      span{
+      span {
         cursor: pointer;
         margin-left: 12px;
       }
@@ -546,7 +546,7 @@ body {
     min-height: 100px;
     border-radius: 12px;
     padding: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
     font-size: 1.2rem;
   }
 
@@ -555,8 +555,10 @@ body {
     border-radius: 8px;
     color: rgb(36, 36, 36);
     letter-spacing: 8px;
-    font-weight: 400;
-    font-size: 1.4rem;
+    margin-top: 20px;
+    border: none;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.369);
+    font-size: 1.2rem;
   }
 }
 
@@ -583,14 +585,23 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .top_section {
-    flex-direction: column;
-    label {
-      text-align: center;
-    }
-    h3 {
-      text-align: center;
-      margin-bottom: 12px;
+  .reviewformula {
+    .top_section {
+      flex-direction: column;
+
+      .rating_section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      label {
+        text-align: center;
+      }
+      h3 {
+        text-align: center;
+        margin-bottom: 12px;
+      }
     }
   }
 
