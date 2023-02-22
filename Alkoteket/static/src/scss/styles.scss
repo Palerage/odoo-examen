@@ -522,15 +522,21 @@ body {
       flex: 1;
     }
     .rating_section {
-      flex: 1;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
 
       .fa-star-o {
         color: rgba(0, 0, 0, 0.612);
       }
+      .fa-star-o-hover {
+        color: #ffaa00;
+      }
       .fa-star {
         color: #ffaa00;
+      }
+      span{
+        cursor: pointer;
+        margin-left: 12px;
       }
     }
   }
