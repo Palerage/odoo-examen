@@ -76,7 +76,10 @@ if (window.location.pathname === "/drinkview") {
     formData.append("rating", currentRating);
     formData.append("comment", comment);
     formData.append("drink_id", id);
-    
+    // console.log("Rating = " + currentRating)
+    // console.log("comment = " + comment)
+    // console.log("drink_id = " + id)
+
     $.ajax({
       url: "/review/create",
       type: "POST",
