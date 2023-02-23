@@ -86,9 +86,9 @@
         <field name="model">alkoteket.drink</field>
         <field name="arch" type="xml">
             <search string="Drinks">
-                <filter string="Cocktail" name="cocktail" domain="[('type', '=', 'alcoholic')]"/>
-                <filter string="Mocktail" name="mocktail" domain="[('type', '=', 'nonalcoholic')]"/>
-                <filter string="Rated" name="others" domain="[('average_score', '!=', '')]"/>
+                <!-- <filter string="Cocktail" name="cocktail" domain="[('type', '=', 'alcoholic')]"/>
+                <filter string="Mocktail" name="mocktail" domain="[('type', '=', 'nonalcoholic')]"/> -->
+                <!-- <filter string="Rated" name="others" domain="[('average_score', '!=', '')]"/> -->
                 <!-- <group expand="1" string="Group By">
                     <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
                     <filter string="Patient Name" name="patient_name" context="{'group_by':'name'}"/>

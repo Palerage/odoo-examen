@@ -18,7 +18,7 @@ class AlkoteketDrink(models.Model):
     type = fields.Selection([
         ('alcoholic', 'Alcoholic'),
         ('nonalcoholic', 'Non-Alcoholic')
-    ],  default='alcoholic') #, store=True, compute='_compute_alcohol_content'
+    ],  default='alcoholic', compute='_compute_alcohol_content') #, store=True, compute='_compute_alcohol_content'
     note = fields.Text(string='Instructions')
     ingredient_amount_ids = fields.One2many('alkoteket.ingredient.amount', 'drink_id',
                                             string="Ingredients",
@@ -28,19 +28,19 @@ class AlkoteketDrink(models.Model):
     total_volume = fields.Float(string="TotalVolume(CL)", compute='_compute_total_volume', store=True)
     alcohol_percentage = fields.Float(string="DrinkPercentage", compute='_compute_alcohol_percentage', store=True)
     drink_review_ids = fields.One2many("alkoteket.drink.review", 'drink_id', string="Reviews")
-    average_score = fields.Float(string="AverageScore", compute='_compute_average_score' , store=True)
+    average_score = fields.Float(string="AverageScore", compute='_compute_average_score' )#, store=True
     image = fields.Binary(string='Drink Image')
     
     created_by_id = fields.Many2one('res.users', string="Creator")
     
-    # @api.depends('ingredient')
-    # def _compute_alcohol_content(self):
-    #     print("Hej")
-    #     for record in self:
-    #         if record.ingredient_ids.filtered(lambda x: x.alcoholcontent > 0):
-    #             record.type = "alcoholic"
-    #         else:
-    #             record.type = "nonalcoholic"
+    @api.depends('ingredient_amount_ids')
+    def _compute_alcohol_content(self):
+        print("Hej")
+        for record in self:
+            if record.ingredient_amount_ids.filtered(lambda x: x.ingredient_ids.alcoholcontent > 0):
+                record.type = "alcoholic"
+            else:
+                record.type = "nonalcoholic"
     
     # Generates a prompt based on ingredients
     
