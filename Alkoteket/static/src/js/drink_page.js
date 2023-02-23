@@ -4,6 +4,22 @@ if (window.location.pathname === "/drinkview") {
 
     id = window.location.search.split("?")[1];
 
+    function FillRatingStars(rating) {
+      var stars = document.querySelectorAll(".rating_section .fa");
+
+      for (let index = 0; index < rating; index++) {
+        const element = stars[index];
+        element.classList.remove("fa-star-o");
+        element.classList.add("fa-star");
+      }
+
+      if (rating % 1 !== 0) {
+        var lastStar = stars[Math.floor(rating)];
+        lastStar.style.width = `${(rating % 1) * 100}%`;
+        lastStar.classList.add("orange");
+      }
+    }
+
     function AddToFavourite() {
       ajax.rpc("/alkoteket/addfavourite/" + id).then(function (data) {
         console.log("Added");
@@ -54,11 +70,13 @@ if (window.location.pathname === "/drinkview") {
                         <div class ="receptbox ">
                           <div class="ratingtop">
                             <div class="rating_section">
-                              <span class="fa fa-star-o" data-rating="1"></span>
-                              <span class="fa fa-star-o" data-rating="2"></span>
-                              <span class="fa fa-star-o" data-rating="3"></span>
-                              <span class="fa fa-star-o" data-rating="4"></span>
-                              <span class="fa fa-star-o" data-rating="5"></span>
+
+
+                            <div class="Stars" style="--rating: ${
+                              drink.average_score
+                            };"></div>
+
+
                             </div>
                           </div>                        
                           <div class="drinkfacts">

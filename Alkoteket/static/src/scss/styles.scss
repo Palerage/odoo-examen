@@ -1,7 +1,11 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 
 // BROWSE PAGE---------------------------------------------------------------------------------------------------------------
-
+:root {
+  --star-size: 30px;
+  --star-color: #3333334b;
+  --star-background: rgb(255, 174, 0);
+}
 header {
   .navbar {
     box-shadow: 0 0 14px 4px rgba(0, 0, 0, 0.547) !important;
@@ -22,11 +26,7 @@ header {
 }
 main,
 body {
-  background: linear-gradient(
-    180deg,
-    rgb(242, 242, 242) 0%,
-    rgb(172, 199, 187) 100%
-  );
+  background: linear-gradient(rgb(242, 242, 242) 0%, rgb(172, 199, 187) 100%);
 
   a {
     color: orange;
@@ -88,12 +88,45 @@ body {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 6px 4px 0px 4px;
+      // padding: 6px 4px 0px 4px;
       background-color: rgb(233, 242, 232);
       box-shadow: 0 0 10px 4px rgba(54, 54, 54, 0.05);
       border-radius: 4px;
-      height: 298px;
+      height: 340px;
       overflow: hidden;
+
+      .rating_section {
+        display: flex;
+        align-items: center;
+
+        p {
+          margin-left: 4px;
+          color: #626262;
+          font-size: 0.81rem;
+          font-style: italic;
+        }
+
+        .Stars {
+          --percent: calc(var(--rating) / 5 * 100%);
+          display: inline-block;
+          font-size: 20px;
+          font-family: Times; // make sure ★ appears correctly
+          line-height: 1;
+          z-index: 100;
+          margin-bottom: 10px;
+          &::before {
+            content: "★★★★★";
+            letter-spacing: 3px;
+            background: linear-gradient(
+              90deg,
+              var(--star-background) var(--percent),
+              var(--star-color) var(--percent)
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+      }
 
       .img-gradient {
         position: relative;
@@ -116,7 +149,7 @@ body {
       }
 
       .img-gradient img {
-        height: 240px;
+        height: 260px;
         width: 100%;
         object-fit: cover;
         z-index: 2;
@@ -144,6 +177,29 @@ body {
   }
 }
 
+#pagination {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  button {
+    all: unset;
+
+    i {
+      font-size: 2rem;
+      color: #242424;
+    }
+
+    i:hover {
+      cursor: pointer;
+      color: #626262;
+    }
+  }
+}
+
 // DRINK SPECIFIC PAGE---------------------------------------------------------------------------------------------------------------
 
 .drinkcontainer {
@@ -157,8 +213,12 @@ body {
   }
 
   .creator {
+    font-size: 1.18rem;
     display: flex;
     gap: 6px;
+  }
+  p {
+    font-size: 1.18rem;
   }
 
   .receptgrid {
@@ -172,6 +232,29 @@ body {
         display: flex;
         align-items: center;
         justify-content: flex-end;
+
+        .rating_section {
+          .Stars {
+            --percent: calc(var(--rating) / 5 * 100%);
+
+            display: inline-block;
+            font-size: var(--star-size);
+            font-family: Times; // make sure ★ appears correctly
+            line-height: 1;
+
+            &::before {
+              content: "★★★★★";
+              letter-spacing: 3px;
+              background: linear-gradient(
+                90deg,
+                var(--star-background) var(--percent),
+                var(--star-color) var(--percent)
+              );
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+          }
+        }
 
         span {
           font-size: 1.6rem;
@@ -313,7 +396,6 @@ body {
     margin: auto;
     width: auto;
     background: linear-gradient(
-      180deg,
       rgba(82, 165, 146, 0.8) 0%,
       rgba(41, 91, 79, 0.8) 100%
     );
@@ -386,7 +468,6 @@ body {
       flex-direction: column;
       justify-content: center;
       background: linear-gradient(
-        180deg,
         rgba(82, 165, 146, 0.8) 0%,
         rgba(41, 91, 79, 0.8) 100%
       );
@@ -499,7 +580,6 @@ body {
   flex-direction: column;
   padding: 20px;
   background: linear-gradient(
-    180deg,
     rgba(82, 165, 146, 0.8) 0%,
     rgba(41, 91, 79, 0.8) 100%
   );
@@ -567,7 +647,6 @@ body {
   .allcomments {
     padding: 20px;
     background: linear-gradient(
-      180deg,
       rgba(82, 165, 146, 0.8) 0%,
       rgba(41, 91, 79, 0.8) 100%
     );
@@ -589,11 +668,21 @@ body {
         align-items: center;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
+        a {
+          h5 {
+            color: orange;
+          }
+        }
+        a:hover {
+          h5 {
+            color: rgb(183, 119, 1);
+          }
+        }
+
         .reviewer {
-          color: #ffaa00;
         }
         h5 {
-          color: rgb(66, 66, 66);
+          color: #626262;
         }
       }
       .middlesection {
@@ -612,8 +701,9 @@ body {
         height: 2px;
 
         p {
-          font-size: 1.2rem;
+          font-size: 1rem;
           color: rgb(116, 116, 116);
+          font-style: italic;
         }
       }
     }
@@ -623,15 +713,16 @@ body {
 // MEDIA FORMAT ---------------------------------------------------------------------------------------------------------------
 
 @media screen and (max-width: 360px) {
-  .drinkgrid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-  .receptgrid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
+  // .drinkgrid {
+  //   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  // }
+  // .receptgrid {
+  //   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  // }
 
   .drinkcontainer .creator {
     flex-direction: column;
+    gap: 10px;
   }
 }
 

@@ -101,7 +101,8 @@ class AlkoteketDrinkController(http.Controller):
                 'name': drink.name,
                 'image' : str(drink.image)[2:-1],
                 'average_score' : drink.average_score,
-                'ingredients' : ingredients
+                'ingredients' : ingredients,
+                'review_amount' : len(drink.drink_review_ids)
             }
             result.append(temp)
         return json.dumps(result)
