@@ -27,7 +27,7 @@ class AlkoteketDrinkController(http.Controller):
             for ingredient in drink.ingredient_amount_ids:
                 ingredients.append({'id' : ingredient.ingredient_ids.id, 'name' : ingredient.ingredient_ids.name, 'qty' : ingredient.qty})
             for review in drink.drink_review_ids:
-                reviews.append({'reviewer_name' : review.create_uid.name, 'score' : review.score, 'review' : review.review})
+                reviews.append({'reviewer_name' : review.create_uid.name, 'score' : review.score, 'review' : review.review, 'created' : str(review.create_date.strftime("%Y-%m-%d %H:%M"))})
             result = {
                 'id': drink.id,
                 'name': drink.name,
@@ -43,7 +43,7 @@ class AlkoteketDrinkController(http.Controller):
                 'reviews': reviews,
                 'favourite' : favourited
             }
-            _logger.error(json.dumps(result))
+            # _logger.error(json.dumps(result))
             return json.dumps(result)
         else:
             return json.dumps({'error': 'Drink not found'})

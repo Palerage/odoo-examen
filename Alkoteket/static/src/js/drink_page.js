@@ -51,12 +51,16 @@ if (window.location.pathname === "/drinkview") {
                           </div>
                           <p>Date: ${drink.drink_create_date.split(" ")[0]}</p>
                         </div>
-                        <div class ="receptbox">
-                        <h4>Rating</h4>
-                        <hr>
-                        <!-- <div class="bar">
-                           <div class="fill" id="fill"></div>
-                           </div> -->
+                        <div class ="receptbox ">
+                          <div class="ratingtop">
+                            <div class="rating_section">
+                              <span class="fa fa-star-o" data-rating="1"></span>
+                              <span class="fa fa-star-o" data-rating="2"></span>
+                              <span class="fa fa-star-o" data-rating="3"></span>
+                              <span class="fa fa-star-o" data-rating="4"></span>
+                              <span class="fa fa-star-o" data-rating="5"></span>
+                            </div>
+                          </div>                        
                           <div class="drinkfacts">
                             <p style="font-style: italic; color:grey;">Reviews: ${
                               drink.review_amount
@@ -65,6 +69,7 @@ if (window.location.pathname === "/drinkview") {
                               drink.average_score
                             } / 5</p> 
                           </div>
+                          <hr>
                         <h4>Ingredients</h4>
                         <hr>
                           `;

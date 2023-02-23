@@ -42,6 +42,7 @@ class ReviewController(http.Controller):
             elif drink.created_by_id.id == current_user.id:
                 _logger.error("------------------4----------------------")                
                 return request.render("alkoteket.error_page", {'error_message': 'You cannot create a review for your own drink.'})
+
             _logger.error(f"DrinkID: {drink_id} CreatedByID: {current_user.id}")
             # Check if the user has already reviewed the drink
             existing_review = request.env['alkoteket.drink.review'].sudo().search([
@@ -68,13 +69,5 @@ class ReviewController(http.Controller):
         drink = request.env['alkoteket.drink'].sudo().search([('id', '=', drink_id)])
         if not drink:
             return request.render("alkoteket.error_page", {'error_message': 'Drink not found'})
+
         return request.render("alkoteket.drink_review_form", {'drink': drink})
-    
-    
-# import odoorpc
-# # Prepare the connection to the server
-# self = odoorpc.ODOO('localhost', port=8069)
-# # Check available databases
-# print(self.db.list())
-# # Login
-# self.login('roymax', 'admin', 'admin')

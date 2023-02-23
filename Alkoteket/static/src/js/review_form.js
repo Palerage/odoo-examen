@@ -1,5 +1,4 @@
 if (window.location.pathname === "/drinkview") {
-
   $(document).ready(function () {
     $('input[name="rating"]').prop("required", true);
   });
@@ -9,7 +8,7 @@ if (window.location.pathname === "/drinkview") {
   var ratingStars = document.querySelectorAll(".rating_section span");
 
   function updateRating() {
-    ratingStars.forEach(function(star) {
+    ratingStars.forEach(function (star) {
       var rating = parseInt(star.getAttribute("data-rating"));
       if (rating <= currentRating) {
         star.classList.add("fa-star");
@@ -20,21 +19,20 @@ if (window.location.pathname === "/drinkview") {
       }
     });
   }
-  
-  ratingStars.forEach(function(star, index) {
-    star.addEventListener("mouseover", function() {
+
+  ratingStars.forEach(function (star, index) {
+    star.addEventListener("mouseover", function () {
       for (var i = 0; i < index + 1; i++) {
         ratingStars[i].classList.add("fa-star-o-hover");
       }
     });
 
-    star.addEventListener("mouseout", function() {
+    star.addEventListener("mouseout", function () {
       for (var i = 0; i < index + 1; i++) {
         ratingStars[i].classList.remove("fa-star-o-hover");
       }
     });
   });
-
 
   // ratingStars.addEventListener('mouseover', (event) => {
 
@@ -45,7 +43,7 @@ if (window.location.pathname === "/drinkview") {
     star.addEventListener("click", function () {
       currentRating = parseInt(star.getAttribute("data-rating"));
       updateRating();
-      $("#reviewsubmit").prop('disabled', false)
+      $("#reviewsubmit").prop("disabled", false);
     });
   });
 
@@ -65,20 +63,16 @@ if (window.location.pathname === "/drinkview") {
   //   console.log(formData);
   //   console.log(id);
 
-    
   // });
 
   $("#review-form").on("submit", function (event) {
     event.preventDefault();
-    comment = $("#myreview").val()
+    comment = $("#myreview").val();
 
     var formData = new FormData();
     formData.append("rating", currentRating);
     formData.append("comment", comment);
     formData.append("drink_id", id);
-    // console.log("Rating = " + currentRating)
-    // console.log("comment = " + comment)
-    // console.log("drink_id = " + id)
 
     $.ajax({
       url: "/review/create",
@@ -88,7 +82,7 @@ if (window.location.pathname === "/drinkview") {
       contentType: false,
       // dataType: "json",
       success: function (data) {
-        // Handle success response from the controller
+        location.reload();
         console.log(data);
       },
       error: function (xhr, ajaxOptions, thrownError) {
@@ -96,6 +90,5 @@ if (window.location.pathname === "/drinkview") {
         console.log(xhr.responseText);
       },
     });
-
-  })
+  });
 }
