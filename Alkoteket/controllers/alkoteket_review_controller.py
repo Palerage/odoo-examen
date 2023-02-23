@@ -10,10 +10,11 @@ _logger = logging.getLogger(__name__)
 class ReviewController(http.Controller):
     name = "alkoteket.review.api"
     
-    @http.route(['/review/create'], type='http', auth="user", website=True, csrf=False)
+    @http.route(['/review/create'], type='http', auth="user", methods=['POST'], website=True, csrf=False)
     def create_drink_review(self, **post):
         _logger.error("--------------------POST DATA-------------------------" + str(post))
         current_user = request.env.user
+        _logger.error(f"---------USER--------{current_user}")
         drink_id = post.get('drink_id')
 
         # Check if the request method is POST
@@ -42,12 +43,15 @@ class ReviewController(http.Controller):
                 _logger.error("------------------4----------------------")                
                 return request.render("alkoteket.error_page", {'error_message': 'You cannot create a review for your own drink.'})
 
+            _logger.error(f"DrinkID: {drink_id} CreatedByID: {current_user.id}")
             # Check if the user has already reviewed the drink
             existing_review = request.env['alkoteket.drink.review'].sudo().search([
-                ('drink_id', '=', drink_id),
-                ('created_by_id', '=', current_user.id),
+                ('drink_id', '=', int(drink_id)),
+                ('created_by_id', '=', int(current_user.id)),
             ])
+            
             if existing_review:
+                _logger.error(f"------------------5----------------------{existing_review}")
                 return request.render("alkoteket.error_page", {'error_message': 'You have already reviewed this drink.'})
 
             # Create a new review
@@ -57,10 +61,7 @@ class ReviewController(http.Controller):
                 'drink_id': drink_id,
                 'created_by_id': current_user.id,  # Set the user who created the review
             })
-            scores = drink.drink_review_ids.mapped('score')
-            _logger.error(f"---------------------------{score}---------------------------")
-            average_score = round(sum(scores) / len(scores), 2) if scores else 0.0
-            drink.write({'average_score': average_score})
+
             # Redirect to the drink's view page
             return request.redirect('/drinkview/?%d' % int(drink_id))
 
@@ -68,4 +69,5 @@ class ReviewController(http.Controller):
         drink = request.env['alkoteket.drink'].sudo().search([('id', '=', drink_id)])
         if not drink:
             return request.render("alkoteket.error_page", {'error_message': 'Drink not found'})
+
         return request.render("alkoteket.drink_review_form", {'drink': drink})
