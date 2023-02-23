@@ -28,7 +28,7 @@ class AlkoteketDrink(models.Model):
     total_volume = fields.Float(string="TotalVolume(CL)", compute='_compute_total_volume', store=True)
     alcohol_percentage = fields.Float(string="DrinkPercentage", compute='_compute_alcohol_percentage', store=True)
     drink_review_ids = fields.One2many("alkoteket.drink.review", 'drink_id', string="Reviews")
-    average_score = fields.Float(string="AverageScore", compute='_compute_average_score')#, store=True
+    average_score = fields.Float(string="AverageScore", compute='_compute_average_score' , store=True)
     image = fields.Binary(string='Drink Image')
     
     created_by_id = fields.Many2one('res.users', string="Creator")

@@ -6,8 +6,9 @@
 
         <section class="comment-box container">
 
-            <p>commentbox</p>
-            <div id="comment-box" class=""></div>
+            <div class="allcomments">
+                <div id="comment-box" class=""></div>
+            </div>
 
         </section>
 

@@ -4,7 +4,7 @@
         <section class="review-form container">
             <form class="reviewformula" id="review-form">
                 <div class="top_section">
-                    <h3>Comment</h3>
+                    <h3>Review</h3>
                     <div class="rating_section">
                         <span class="fa fa-star-o" data-rating="1"></span>
                         <span class="fa fa-star-o" data-rating="2"></span>

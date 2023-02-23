@@ -24,15 +24,27 @@ if (window.location.pathname === "/drinkview") {
 
       // Define a variable to store the HTML template for displaying reviews
       var reviewTemplate = "";
-
       // Loop through each drink in the 'drink' array
       drink.forEach(function (drink) {
         // Loop through each review in the 'reviews' array of the current drink
         drink.reviews.forEach(function (review) {
           // Add a new paragraph to the 'reviewTemplate' variable for the current review
-          reviewTemplate += `<p>Score: ${review.score}<br>Review: ${review.review}<br>Created By: ${review.reviewer_name}</p>`;
+          reviewTemplate += `
+          <div class="individualcomment">
+            <div class="topsection">
+                <a href="${"/profile?" + drink.creator_id}">
+                    <h5 class="reviewer">${review.reviewer_name}</h5>
+                </a> 
+                <h5>Rating: ${review.score} / 5</h5>
+            </div>
+            <div class="middlesection">
+                <p>${review.review}</p>
+            </div>
+            <div class="bottomsection">
+                <p>${review.created}</p>
+            </div>
+          </div>`;
         });
-
         // Insert the 'reviewTemplate' HTML into the 'comment-box' element on the page
         document
           .querySelector("#comment-box")

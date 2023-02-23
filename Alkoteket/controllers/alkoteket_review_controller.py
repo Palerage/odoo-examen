@@ -57,7 +57,10 @@ class ReviewController(http.Controller):
                 'drink_id': drink_id,
                 'created_by_id': current_user.id,  # Set the user who created the review
             })
-
+            scores = drink.drink_review_ids.mapped('score')
+            _logger.error(f"---------------------------{score}---------------------------")
+            average_score = round(sum(scores) / len(scores), 2) if scores else 0.0
+            drink.write({'average_score': average_score})
             # Redirect to the drink's view page
             return request.redirect('/drinkview/?%d' % int(drink_id))
 
