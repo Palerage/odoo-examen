@@ -2,7 +2,6 @@ if (window.location.pathname === "/profile") {
   var count = 10;
   odoo.define("fav_drinks", function (require) {
     var ajax = require("web.ajax");
-
     var id = window.location.search.split("?")[1];
 
     if (id === undefined) {
@@ -10,25 +9,28 @@ if (window.location.pathname === "/profile") {
     }
 
     ajax.rpc("/alkoteket/favouritesbyuser/" + id).then(function (data) {
-      console.log(data);
       var drinks = JSON.parse(data);
-      console.log(drinks.length);
       count = drinks.length;
       console.log(drinks);
 
       drinks.forEach(function (drink) {
         var drinkTemplate = `
-                      <a href="${"/drinkview?" + drink.id}">
-                        <div class="box">
-                          <div class="img-gradient"> 
-                            <img src="data:image/jpg;base64,${
-                              drink.image
-                            }"/>                    
-                          </div>
-                        <h5>${drink.name}</h5>
-                        
-                        </div>
-                      </a>
+        <section class="drinkcontainer">
+        <a href="${"/drinkview?" + drink.id}">
+          <div class="box">
+            <div class="img-gradient">
+              <img src="data:image/jpg;base64,${drink.image}"/>                 
+            </div>
+            <h5>${drink.name}</h5>
+            <div class="rating_section">
+              <div class="Stars" style="--rating: ${
+                drink.average_score
+              };"></div>
+              <p>(${drink.review_amount})</p>                
+          </div>
+          </div>
+        </a>
+      </section>
                     `;
         document
           .querySelector("#fav-drinks")
@@ -40,25 +42,19 @@ if (window.location.pathname === "/profile") {
       h3.innerHTML = "Favourites" + " (" + count + ")";
       h3.style.display = "inline-block";
 
-      // Create the toggle button
-      var toggleButton = document.createElement("button");
-      toggleButton.style.display = "inline-block";
-
       // Create the <i> element and add the "fa-toggle-off" class to it
       var toggleIcon = document.createElement("i");
       toggleIcon.classList.add("bi-caret-down");
-
-      // Append the <i> element to the toggle button
-      toggleButton.appendChild(toggleIcon);
 
       // Create the div container
       var togglesection = document.createElement("div");
       togglesection.classList.add("togglesection");
       togglesection.style.display = "flex";
+      togglesection.style.cursor = "pointer";
 
       // Append the h3 and toggle button to the div container
       togglesection.appendChild(h3);
-      togglesection.appendChild(toggleButton);
+      togglesection.appendChild(toggleIcon);
 
       // Insert the div container before the content container
       document
@@ -70,8 +66,8 @@ if (window.location.pathname === "/profile") {
       // Set the initial value of the content container to "none"
       contentContainer.style.display = "none";
 
-      // Add a click event listener to the toggle button
-      toggleButton.addEventListener("click", function () {
+      // Add a click event listener to the toggle section
+      togglesection.addEventListener("click", function () {
         if (contentContainer.style.display === "none") {
           contentContainer.style.display = "grid";
           toggleIcon.classList.remove("bi-caret-down");

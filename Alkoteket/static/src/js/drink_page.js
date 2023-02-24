@@ -38,6 +38,12 @@ if (window.location.pathname === "/drinkview") {
       console.log(data);
       var drink = [JSON.parse(data)];
       console.log(drink);
+      console.log("Show_form: ");
+      console.log(drink[0].show_form);
+
+      if (drink[0].show_form == false) {
+        $("#review-form").hide();
+      }
 
       for (let index = 0; index < drink.length; index++) {
         const element = drink[index];

@@ -42,7 +42,15 @@ if (window.location.pathname === "/profile") {
         }
       })
       .catch(function (error) {
-        console.error("Error retrieving user data:", error);
+        console.log("error: ");
+        console.log(error);
+        window.location.href = "/web/login";
+
+        // if (error.response && error.response.status === 403) {
+        //   // Redirect the user to the login page
+        // } else {
+        //   console.error("Error retrieving user data:", error);
+        // }
       });
     // ajax
     //   .get("/users/" + id, {})
