@@ -427,6 +427,8 @@ body {
       }
       p {
         margin-top: 12px;
+        font-style: italic;
+        color: rgba(0, 0, 0, 0.4);
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
       }
@@ -547,6 +549,13 @@ body {
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start;
+        width: 250px;
+        img {
+          height: 250px;
+          width: 100%;
+          object-fit: contain;
+          margin-bottom: 20px;
+        }
       }
 
       .ingredientelementa {

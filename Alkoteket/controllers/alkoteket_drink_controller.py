@@ -13,7 +13,18 @@ class AlkoteketDrinkController(http.Controller):
     # Returns drink info based on id
     @http.route(['/alkoteket/drink/<int:id>'], auth='public', type="json", methods=['POST'] )
     def get_drink_by_id(self, id):
+        _logger.error(f"----------USER ID:{request.env.user.id}")
+        user_id = request.env.user.id
         drink = request.env['alkoteket.drink'].sudo().search([('id', '=', id)], limit=1)
+        show_form = True
+        if user_id == 4 or user_id == drink.create_uid.id:
+            show_form = False
+            
+        for review in drink.drink_review_ids:
+            if review.created_by_id.id == user_id:
+                show_form = False
+                break
+            
         ingredients = []
         reviews = []
         user = request.env['res.users'].sudo().browse(request.session.uid)
@@ -26,8 +37,20 @@ class AlkoteketDrinkController(http.Controller):
             
             for ingredient in drink.ingredient_amount_ids:
                 ingredients.append({'id' : ingredient.ingredient_ids.id, 'name' : ingredient.ingredient_ids.name, 'qty' : ingredient.qty})
-            for review in drink.drink_review_ids:
-                reviews.append({'reviewer_name' : review.create_uid.name, 'score' : review.score, 'review' : review.review, 'created' : str(review.create_date.strftime("%Y-%m-%d %H:%M"))})
+            for review in sorted(drink.drink_review_ids, key=lambda r: r.create_date, reverse=True):
+                created_by_current_user = review.created_by_id.id == user_id
+                reviews.append({
+                    'review_id': review.id,
+                    'created_by_current_user': created_by_current_user,
+                    'created_by_id': review.created_by_id.id,
+                    'reviewer_name': review.create_uid.name,
+                    'score': review.score,
+                    'review': review.review,
+                    'created': str(review.create_date.strftime("%Y-%m-%d %H:%M"))
+                })
+
+            # Move the current user's review to the beginning of the list
+            reviews = sorted(reviews, key=lambda r: not r['created_by_current_user'])
             result = {
                 'id': drink.id,
                 'name': drink.name,
@@ -41,7 +64,8 @@ class AlkoteketDrinkController(http.Controller):
                 'drink_create_date': str(drink.create_date),
                 'review_amount': len(drink.drink_review_ids),
                 'reviews': reviews,
-                'favourite' : favourited
+                'favourite' : favourited,
+                'show_form' : show_form
             }
             # _logger.error(json.dumps(result))
             return json.dumps(result)
@@ -184,7 +208,8 @@ class AlkoteketDrinkController(http.Controller):
             'id': drink.id,
             'name': drink.name,
             'average_score' : drink.average_score,
-            'image' : str(drink.image)[2:-1]
+            'image' : str(drink.image)[2:-1],
+            'review_amount' : len(drink.drink_review_ids)
         } for drink in drinks]
         return json.dumps(result)
     
@@ -205,7 +230,8 @@ class AlkoteketDrinkController(http.Controller):
             'id': drink.id,
             'name': drink.name,
             'average_score' : drink.average_score,
-            'image' : str(drink.image)[2:-1]
+            'image' : str(drink.image)[2:-1],
+            'review_amount' : len(drink.drink_review_ids)
         } for drink in fav_drinks]
         return json.dumps(result)
     

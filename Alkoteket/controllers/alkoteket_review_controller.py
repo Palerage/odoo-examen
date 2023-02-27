@@ -11,12 +11,14 @@ class ReviewController(http.Controller):
     name = "alkoteket.review.api"
     
     @http.route(['/review/create'], type='http', auth="user", methods=['POST'], website=True, csrf=False)
-    def create_drink_review(self, **post):
-        _logger.error("--------------------POST DATA-------------------------" + str(post))
+    def create_drink_review(self, **post):   
+        _logger.error("create_drink_review" * 100)
+        if not request.env.user.id:
+            return request.redirect('/web/login?redirect=/review/create&message=Please+sign+in+to+submit+a+review')
+        
         current_user = request.env.user
-        _logger.error(f"---------USER--------{current_user}")
         drink_id = post.get('drink_id')
-
+        
         # Check if the request method is POST
         if request.httprequest.method == 'POST':
             # Validate user input
@@ -30,11 +32,6 @@ class ReviewController(http.Controller):
                 return request.render("alkoteket.error_page", {'error_message': 'Invalid score'})
 
             review = post.get('comment')
-            # if not review:
-            #     _logger.error("------------------2----------------------")
-            #     return request.render("alkoteket.error_page", {'error_message': 'Review cannot be empty'})
-
-            # Check if current user is the creator of the drink
             drink = request.env['alkoteket.drink'].sudo().search([('id', '=', drink_id)])
             if not drink:
                 _logger.error("------------------3----------------------")
@@ -55,6 +52,7 @@ class ReviewController(http.Controller):
                 return request.render("alkoteket.error_page", {'error_message': 'You have already reviewed this drink.'})
 
             # Create a new review
+            
             new_review = request.env['alkoteket.drink.review'].sudo().create({
                 'score': score,
                 'review': review,
@@ -71,3 +69,15 @@ class ReviewController(http.Controller):
             return request.render("alkoteket.error_page", {'error_message': 'Drink not found'})
 
         return request.render("alkoteket.drink_review_form", {'drink': drink})
+    
+    @http.route('/review/delete/<int:review_id>', type='http', auth='user', website=True, csrf=False)
+    def delete_drink_review(self, review_id=None, **kwargs):
+        if review_id:
+            review = request.env['alkoteket.drink.review'].sudo().search([('id', '=', review_id)])
+            if review:
+                if review.created_by_id.id == request.env.user.id: # Check if the user who created the review is the same as the current user
+                    review.unlink()
+                    return request.redirect('/browse') # Redirect to a specific URL after deletion
+                else:
+                    return request.redirect('/browse') # Redirect to a specific URL if the user is not authorized to delete the review
+        return request.redirect('/browse') # Redirect to a specific URL if review_id is not provided or review does not exist

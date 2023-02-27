@@ -5,13 +5,16 @@ import logging
 import random
 import json
 from odoo.http import Response
+
 _logger = logging.getLogger(__name__)
 
 class UserController(http.Controller):
     name = "alkoteket.user.api"
     
-    @http.route('/users/<int:user_id>', type="json", methods=['POST'], auth='public')
-    def user_profile(self, user_id):
+    @http.route('/users/<int:user_id>', type="json", methods=['POST'], auth='user')
+    def user_profile(self, user_id):  
+        
+        
         _logger.error("-----------------------------USER--------------------------------------")
         if(user_id == 0):
             # Return the current user's ID if user_id is 0
