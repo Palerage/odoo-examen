@@ -1,8 +1,11 @@
-if (window.location.pathname === "/create") {
+breakme: if (window.location.pathname === "/create") {
   var ingredientlistelement = $("#add_ingredients");
   var index = 0;
 
   var ingredientcounter = document.getElementById("ingredientcounter");
+  if(ingredientcounter == null){
+    break breakme;
+  }
   ingredientcounter.innerText = "0";
   var counter = 0;
   var maxIngredients = 6;

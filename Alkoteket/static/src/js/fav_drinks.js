@@ -1,6 +1,10 @@
 if (window.location.pathname === "/profile") {
   var count = 10;
   odoo.define("fav_drinks", function (require) {
+    //Fulfix
+    if($("#profile-drinks")){
+      return
+    }
     var ajax = require("web.ajax");
     var id = window.location.search.split("?")[1];
 

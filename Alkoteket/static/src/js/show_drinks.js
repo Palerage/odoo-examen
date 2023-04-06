@@ -12,6 +12,9 @@ if (window.location.pathname === "/browse") {
     function renderDrinks(filteredDrinks) {
       console.log(filteredDrinks);
       var drinkContainer = document.querySelector("#show-drinks");
+      if(drinkContainer == null){
+        return
+      }
       drinkContainer.innerHTML = "";
 
       var startIndex = (page - 1) * drinksPerPage;

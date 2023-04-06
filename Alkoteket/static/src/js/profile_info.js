@@ -1,11 +1,10 @@
-if (window.location.pathname === "/profile") {
-  console.log("This is outside the profile_info module!");
-  // document.addEventListener("DOMContentLoaded", function (event) {
-  console.log("This is the profile_info module!");
+breakme: if (window.location.pathname === "/profile") {
+  if($("profile-info")[0] == null){
+    break breakme
+  }
   odoo.define("profile_info", function (require) {
-    console.log(
-      "------------------------_IM INSIDE!-----------------------------------"
-    );
+
+
     var ajax = require("web.ajax");
     var id = window.location.search.split("?")[1];
 
