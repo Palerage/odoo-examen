@@ -13,9 +13,6 @@ class UserController(http.Controller):
     
     @http.route('/users/<int:user_id>', type="json", methods=['POST'], auth='user')
     def user_profile(self, user_id):  
-        
-        
-        _logger.error("-----------------------------USER--------------------------------------")
         if(user_id == 0):
             # Return the current user's ID if user_id is 0
             user_id = request.env.user.id

@@ -93,12 +93,9 @@ class AlkoteketDrink(models.Model):
                 record.alcohol_percentage = 0
     
     def unlink(self):
-        _logger.error(f"Deleting--------------------------")
         for ingredient in self.ingredient_amount_ids:
-            _logger.error(f"{ingredient}")
             ingredient.unlink()
         for review in self.drink_review_ids:
-            _logger.error(f"{review}")
             review.unlink()
             
         return super(AlkoteketDrink, self).unlink()
@@ -113,7 +110,6 @@ class AlkoteketDrink(models.Model):
 
     @api.model
     def create(self, vals):
-        _logger.error(vals)
         if not vals.get('note'):
             vals["note"] = "No description available..."
         # Sets the appropriate type depending on alcoholcontent in the ingredients.

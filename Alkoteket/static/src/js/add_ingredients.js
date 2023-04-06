@@ -29,6 +29,10 @@ if (window.location.pathname === "/create") {
 
   $("#drink-form").on("submit", function (event) {
     event.preventDefault();
+    if($("#img")[0].value == "" || $("#drinkname")[0].value == "" || counter == 0){
+      alert("Your drink is incomplete...")
+      return
+    }
 
     var drink_name = $("#drinkname").val();
     var note = $("#subject").val();
