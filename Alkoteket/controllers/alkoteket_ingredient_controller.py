@@ -25,7 +25,6 @@ class AlkoteketIngredientController(http.Controller):
     # Returns ingredients
     @http.route(['/alkoteket/ingredients'], auth='public', type="http", methods=['GET'] )
     def get_cocktails(self, limit=5, offset=0):
-        _logger.error(f"{self}")
         limit = int(limit)
         # if limit > 20:
         #     limit = 20

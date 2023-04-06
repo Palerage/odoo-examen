@@ -12,7 +12,6 @@ class ReviewController(http.Controller):
     
     @http.route(['/review/create'], type='http', auth="user", methods=['POST'], website=True, csrf=False)
     def create_drink_review(self, **post):   
-        _logger.error("create_drink_review" * 100)
         if not request.env.user.id:
             return request.redirect('/web/login?redirect=/review/create&message=Please+sign+in+to+submit+a+review')
         
@@ -24,23 +23,18 @@ class ReviewController(http.Controller):
             # Validate user input
             try:
                 score = int(post.get('rating'))
-                _logger.error(score)
                 if score < 1 or score > 5:
                     raise ValueError('Invalid score')
             except (ValueError, TypeError):
-                _logger.error("------------------1----------------------")
                 return request.render("alkoteket.error_page", {'error_message': 'Invalid score'})
 
             review = post.get('comment')
             drink = request.env['alkoteket.drink'].sudo().search([('id', '=', drink_id)])
             if not drink:
-                _logger.error("------------------3----------------------")
                 return request.render("alkoteket.error_page", {'error_message': 'Drink not found'})
             elif drink.created_by_id.id == current_user.id:
-                _logger.error("------------------4----------------------")                
                 return request.render("alkoteket.error_page", {'error_message': 'You cannot create a review for your own drink.'})
 
-            _logger.error(f"DrinkID: {drink_id} CreatedByID: {current_user.id}")
             # Check if the user has already reviewed the drink
             existing_review = request.env['alkoteket.drink.review'].sudo().search([
                 ('drink_id', '=', int(drink_id)),
@@ -48,7 +42,6 @@ class ReviewController(http.Controller):
             ])
             
             if existing_review:
-                _logger.error(f"------------------5----------------------{existing_review}")
                 return request.render("alkoteket.error_page", {'error_message': 'You have already reviewed this drink.'})
 
             # Create a new review

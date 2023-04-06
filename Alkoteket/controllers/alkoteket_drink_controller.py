@@ -13,7 +13,6 @@ class AlkoteketDrinkController(http.Controller):
     # Returns drink info based on id
     @http.route(['/alkoteket/drink/<int:id>'], auth='public', type="json", methods=['POST'] )
     def get_drink_by_id(self, id):
-        _logger.error(f"----------USER ID:{request.env.user.id}")
         user_id = request.env.user.id
         drink = request.env['alkoteket.drink'].sudo().search([('id', '=', id)], limit=1)
         show_form = True
@@ -67,7 +66,6 @@ class AlkoteketDrinkController(http.Controller):
                 'favourite' : favourited,
                 'show_form' : show_form
             }
-            # _logger.error(json.dumps(result))
             return json.dumps(result)
         else:
             return json.dumps({'error': 'Drink not found'})
@@ -87,7 +85,6 @@ class AlkoteketDrinkController(http.Controller):
     # Returns alcoholic drinks
     @http.route(['/alkoteket/cocktails'], auth='public', type="http", methods=['GET'] )
     def get_cocktails(self, limit=5, offset=0):
-        _logger.error(f"{self}")
         limit = int(limit)
         if limit > 20:
             limit = 20
@@ -154,7 +151,6 @@ class AlkoteketDrinkController(http.Controller):
                     if ingredient.ingredient_ids.id not in ingredients:
                         add_drink = False
                 if add_drink:
-                    _logger.error(f"{drink.name} is available")
                     drink_names.append(drink.name)
             return json.dumps(drink_names)
         else:
@@ -182,7 +178,6 @@ class AlkoteketDrinkController(http.Controller):
                         number_of_missing += 1
                         missing_ingredients += ingredient.ingredient_ids.name + ","
                 if add_drink:
-                    _logger.error(f"{drink.name} is available")
                     drink_names.append(f"{drink.name}(missing({number_of_missing}): {missing_ingredients})")
             return json.dumps(drink_names)
         else:
@@ -219,11 +214,6 @@ class AlkoteketDrinkController(http.Controller):
         if id == 0:
             id = request.env.user.id
             
-        _logger.error(f"-----UserID-------- {request.env.user.id}")
-        _logger.error(f"-----UserName-------- {request.env.user.name}")
-        # _logger.error(f"-----UserFavourites-------- {request.env.user.fav_drinks[0].name}")
-        
-        
         user = request.env['res.users'].sudo().browse(int(id))
         fav_drinks = user.fav_drinks
         result = [{
@@ -257,9 +247,6 @@ class AlkoteketDrinkController(http.Controller):
     
     @http.route(['/alkoteket/createdrink'], type='http', auth='user', methods=['POST'], csrf=False)
     def create_drink(self, **kwargs):
-        _logger.error(f"---------------------KWARGS----------------------------{kwargs}")
-        
-        _logger.error(f"---------------------KWARGS-INGREDIENTS----------------------------{kwargs.get('ingredients')}")
         # https://www.w3docs.com/snippets/javascript/how-to-convert-the-image-into-a-base64-string-using-javascript.html
         drink_name = kwargs.get('drink_name')
         drink_type = 'alcoholic'# kwargs.get('drink_type')
