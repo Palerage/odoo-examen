@@ -1,7 +1,7 @@
 breakme: if (window.location.pathname === "/profile") {
-  if($("profile-info")[0] == null){
-    break breakme
-  }
+  // if($("profile-info")[0] == null){
+  //   break breakme
+  // }
   odoo.define("profile_info", function (require) {
 
 

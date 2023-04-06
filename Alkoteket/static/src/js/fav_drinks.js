@@ -2,7 +2,7 @@ if (window.location.pathname === "/profile") {
   var count = 10;
   odoo.define("fav_drinks", function (require) {
     //Fulfix
-    if($("#profile-drinks")){
+    if($("#profile-drinks")[0] == null){
       return
     }
     var ajax = require("web.ajax");
