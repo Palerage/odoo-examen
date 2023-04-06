@@ -1,4 +1,7 @@
-if (window.location.pathname === "/drinkview") {
+breakme: if (window.location.pathname === "/drinkview") {
+  if($("#drink-page")[0] == null ){
+    break breakme;
+  }
   odoo.define("drink_page", function (require) {
     var ajax = require("web.ajax");
 

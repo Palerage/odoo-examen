@@ -1,5 +1,9 @@
 // Check if current URL path is '/drinkview'
-if (window.location.pathname === "/drinkview") {
+breakme: if (window.location.pathname === "/drinkview") {
+  //fulfix
+  if($("#comment-box")[0] == null ){
+    break breakme;
+  }
   console.log("----------------------------HEJ HEJ HEJ----------------");
   function deleteReview(review_id) {
     $.ajax({
